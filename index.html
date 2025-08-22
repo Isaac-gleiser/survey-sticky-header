@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Survey — Sticky Header</title>
+  <style>
+    :root {
+      --header-bg: #ffffff;
+      --header-border: #e8e8e8;
+      --header-shadow: 0 2px 10px rgba(0,0,0,.06);
+      --accent: #1a73e8;
+      --text: #111;
+      --muted: #666;
+      --header-height: 68px; /* updated by JS */
+      --safe-top: env(safe-area-inset-top, 0px);
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #fafafa;
+      color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      /* Ensure in-page anchors (e.g., #start) account for fixed header */
+      scroll-padding-top: calc(var(--header-height) + var(--safe-top));
+    }
+
+    /* Sticky site header */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: calc(12px + var(--safe-top)) 16px 12px 16px;
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--header-border);
+      box-shadow: var(--header-shadow);
+      -webkit-backdrop-filter: saturate(180%) blur(10px);
+      backdrop-filter: saturate(180%) blur(10px);
+    }
+
+    .brand { display:flex; align-items:center; gap:10px; min-width:0; }
+    .brand-logo { width:28px; height:28px; border-radius:6px; background:var(--accent); flex:0 0 auto; }
+    .brand-title { font-size:16px; font-weight:600; letter-spacing:.2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .brand-sub { display:block; font-size:12px; color:var(--muted); font-weight:500; letter-spacing:.2px; }
+
+    .hdr-actions { display:flex; align-items:center; gap:8px; flex:0 0 auto; }
+    .btn {
+      appearance:none; border:1px solid var(--accent); background:var(--accent);
+      color:#fff; padding:8px 12px; border-radius:8px; font-weight:600; font-size:13px; cursor:pointer;
+    }
+    .btn.secondary { background:transparent; color:var(--accent); }
+
+    /* Below header */
+    .page {
+      padding-top: calc(var(--header-height) + var(--safe-top));
+      max-width: 1200px; margin: 0 auto;
+    }
+    .notice { margin: 10px 16px 0 16px; font-size:13px; color:var(--muted); }
+
+    /* Frame container takes remaining viewport height */
+    .frame-wrap {
+      margin: 10px 16px 16px 16px;
+      background:#fff; border:1px solid var(--header-border); border-radius:12px; overflow:hidden;
+      box-shadow: 0 6px 24px rgba(0,0,0,.06);
+      height: calc(100vh - var(--header-height) - 30px - var(--safe-top));
+      display:flex; flex-direction:column;
+    }
+    /* Prefer modern dynamic viewport when available */
+    @supports (height: 100dvh) {
+      .frame-wrap { height: calc(100dvh - var(--header-height) - 30px - var(--safe-top)); }
+    }
+
+    /* This header stays visible while the iframe scrolls internally */
+    .frame-wrap header {
+      padding: 12px 14px; border-bottom: 1px solid var(--header-border);
+      display:flex; align-items:center; justify-content:space-between; gap:8px;
+    }
+    .frame-title { font-weight:600; font-size:14px; }
+    .frame-sub { font-size:12px; color:var(--muted); }
+
+    iframe.form-frame {
+      width:100%;
+      border:0;
+      flex:1 1 auto; height:100%;
+      background:#fff;
+    }
+
+    .to-top {
+      position: fixed; right: 16px; bottom: 16px; z-index: 1100;
+      display: none;
+      border: 1px solid var(--header-border); background: #fff; padding: 10px 12px; border-radius: 999px; font-weight: 700; cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    }
+
+    @media (max-width: 600px) {
+      .brand-title { font-size:15px; }
+      .btn span.long { display:none; }
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html, body { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sticky Header -->
+  <header class="site-header" id="siteHeader" role="banner" aria-label="Sticky header">
+    <div class="brand">
+      <div class="brand-logo" aria-hidden="true"></div>
+      <div>
+        <div class="brand-title">Customer Feedback 2025</div>
+        <small class="brand-sub">~5 minutes • 8 questions</small>
+      </div>
+    </div>
+    <nav class="hdr-actions" aria-label="Header actions">
+      <button class="btn secondary" type="button" id="resetBtn">Reset form</button>
+      <a class="btn" href="#start" role="button"><span class="long">Jump to form</span> ▶</a>
+    </nav>
+  </header>
+
+  <!-- Page Content -->
+  <main class="page" id="start">
+    <p class="notice" aria-live="polite">
+      The header above stays visible while you fill out the form. Your responses are submitted to Google Forms normally.
+    </p>
+
+    <section class="frame-wrap" aria-label="Embedded Google Form">
+      <header>
+        <div class="frame-title">Survey</div>
+        <div class="frame-sub">Powered by Google Forms</div>
+      </header>
+
+      <iframe
+        class="form-frame"
+        title="Google Form"
+        id="formFrame"
+        src="about:blank"
+        allow="clipboard-write"
+        referrerpolicy="no-referrer-when-downgrade"
+        loading="lazy">
+      </iframe>
+    </section>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
+
+  <script>
+    const header = document.getElementById('siteHeader');
+    const toTop = document.getElementById('toTop');
+    const formFrame = document.getElementById('formFrame');
+    const resetBtn = document.getElementById('resetBtn');
+
+    // Use the official embed parameter for a cleaner form
+    const FORM_SRC_BASE = "https://docs.google.com/forms/d/e/1FAIpQLSdI6Y97Fkbfm6ev2A4nZis1-yuuhgOVkk9vJ8fSgsDvXa63Dg/viewform?embedded=true";
+
+    function setHeaderHeightVar() {
+      const h = header.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--header-height', h + 'px');
+    }
+
+    function fitFrameWrap() {
+      const inner = window.innerHeight;
+      const computedHeader = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || header.getBoundingClientRect().height;
+      const safeTop = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--safe-top')) || 0;
+      const wrap = document.querySelector('.frame-wrap');
+      const marginAndGaps = 30;
+      wrap.style.height = (inner - computedHeader - marginAndGaps - safeTop) + 'px';
+    }
+
+    function toggleTopButton() {
+      const y = window.scrollY || document.documentElement.scrollTop;
+      toTop.style.display = y > 200 ? 'block' : 'none';
+    }
+
+    // Working reset: reload iframe with cache-busting param
+    function resetForm() {
+      formFrame.src = FORM_SRC_BASE + "&ts=" + Date.now();
+    }
+
+    // Smooth scroll (respect reduced motion)
+    toTop.addEventListener('click', () => {
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+    });
+
+    resetBtn.addEventListener('click', resetForm);
+
+    // Initial layout + load the form
+    window.addEventListener('load', () => {
+      setHeaderHeightVar();
+      fitFrameWrap();
+      toggleTopButton();
+      resetForm(); // sets the iframe src the first time
+    });
+
+    window.addEventListener('resize', () => { setHeaderHeightVar(); fitFrameWrap(); });
+    window.addEventListener('orientationchange', () => { setHeaderHeightVar(); fitFrameWrap(); });
+    window.addEventListener('scroll', toggleTopButton);
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => { setHeaderHeightVar(); fitFrameWrap(); });
+    }
+  </script>
+</body>
+</html>
