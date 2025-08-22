@@ -1,18 +1,31 @@
-<section class="frame-wrap" aria-label="Sticky Likert Survey">
+<section class="frame-wrap" aria-label="Custom Survey (posts to Google Forms)">
   <header>
     <div class="frame-title">Survey</div>
-    <div class="frame-sub">Sticky column labels</div>
+    <div class="frame-sub">Sticky column labels • Submits to Google Forms</div>
   </header>
 
   <form
-    id="likertForm"
+    id="customForm"
     method="POST"
     action="https://docs.google.com/forms/d/e/1FAIpQLSdI6Y97Fkbfm6ev2A4nZis1-yuuhgOVkk9vJ8fSgsDvXa63Dg/formResponse"
     target="_self"
     style="flex:1 1 auto; display:flex; flex-direction:column;"
   >
-    <!-- Scrollable area with sticky header -->
-    <div class="likert-wrap" style="overflow:auto; flex:1 1 auto;">
+
+    <!-- ===== Short answer examples (map to your actual labels) ===== -->
+    <div style="padding:12px 14px; display:grid; gap:10px;">
+      <label>
+        <div style="font-weight:600; margin-bottom:6px;">Short answer A</div>
+        <input name="entry.1433485799" type="text" style="width:100%; padding:10px; border:1px solid var(--header-border); border-radius:8px;">
+      </label>
+      <label>
+        <div style="font-weight:600; margin-bottom:6px;">Short answer B</div>
+        <input name="entry.1027960232" type="text" style="width:100%; padding:10px; border:1px solid var(--header-border); border-radius:8px;">
+      </label>
+    </div>
+
+    <!-- ===== Likert Matrix 1: Confidence at work (sticky header) ===== -->
+    <div class="likert-wrap" role="region" aria-label="Confidence matrix" style="overflow:auto; flex:1 1 auto; border-top:1px solid var(--header-border); border-bottom:1px solid var(--header-border);">
       <table class="likert" style="width:100%; border-collapse:separate; border-spacing:0;">
         <thead style="position:sticky; top:0; background:#fff; z-index:1; box-shadow:0 1px 0 var(--header-border);">
           <tr>
@@ -25,74 +38,128 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Row 1 -->
           <tr>
             <th style="text-align:left; padding:10px 12px;">Show my boss that I am a good listener</th>
             <td><input type="radio" name="entry.805458951" value="Not confident at all" required></td>
-            <td><input type="radio" name="entry.733749747" value="Not confident"></td>
-            <td><input type="radio" name="entry.1066206864" value="Neutral"></td>
-            <td><input type="radio" name="entry.835078316" value="Confident"></td>
-            <td><input type="radio" name="entry.781614692" value="Very confident"></td>
+            <td><input type="radio" name="entry.805458951" value="Not confident"></td>
+            <td><input type="radio" name="entry.805458951" value="Neutral"></td>
+            <td><input type="radio" name="entry.805458951" value="Confident"></td>
+            <td><input type="radio" name="entry.805458951" value="Very confident"></td>
           </tr>
-
-          <!-- Row 2 -->
           <tr>
             <th style="text-align:left; padding:10px 12px;">Collaborate effectively with my new colleagues</th>
             <td><input type="radio" name="entry.1519476565" value="Not confident at all" required></td>
-            <td><input type="radio" name="entry.1293521952" value="Not confident"></td>
-            <td><input type="radio" name="entry.1507192472" value="Neutral"></td>
-            <td><input type="radio" name="entry.333626037" value="Confident"></td>
-            <td><input type="radio" name="entry.1979225742" value="Very confident"></td>
+            <td><input type="radio" name="entry.1519476565" value="Not confident"></td>
+            <td><input type="radio" name="entry.1519476565" value="Neutral"></td>
+            <td><input type="radio" name="entry.1519476565" value="Confident"></td>
+            <td><input type="radio" name="entry.1519476565" value="Very confident"></td>
           </tr>
-
-          <!-- Row 3 -->
           <tr>
             <th style="text-align:left; padding:10px 12px;">Ask my colleagues a question if uncertain</th>
             <td><input type="radio" name="entry.564761604" value="Not confident at all" required></td>
-            <td><input type="radio" name="entry.390969722" value="Not confident"></td>
-            <td><input type="radio" name="entry.1788197559" value="Neutral"></td>
-            <td><input type="radio" name="entry.754013942" value="Confident"></td>
-            <td><input type="radio" name="entry.126815355" value="Very confident"></td>
+            <td><input type="radio" name="entry.564761604" value="Not confident"></td>
+            <td><input type="radio" name="entry.564761604" value="Neutral"></td>
+            <td><input type="radio" name="entry.564761604" value="Confident"></td>
+            <td><input type="radio" name="entry.564761604" value="Very confident"></td>
           </tr>
-
-          <!-- Row 4 -->
           <tr>
             <th style="text-align:left; padding:10px 12px;">Ask my boss a question if uncertain</th>
             <td><input type="radio" name="entry.1723504761" value="Not confident at all" required></td>
-            <td><input type="radio" name="entry.1391353349" value="Not confident"></td>
-            <td><input type="radio" name="entry.1000657774" value="Neutral"></td>
-            <td><input type="radio" name="entry.1145681559" value="Confident"></td>
-            <td><input type="radio" name="entry.452171408" value="Very confident"></td>
+            <td><input type="radio" name="entry.1723504761" value="Not confident"></td>
+            <td><input type="radio" name="entry.1723504761" value="Neutral"></td>
+            <td><input type="radio" name="entry.1723504761" value="Confident"></td>
+            <td><input type="radio" name="entry.1723504761" value="Very confident"></td>
           </tr>
-
-          <!-- Row 5 -->
           <tr>
             <th style="text-align:left; padding:10px 12px;">Speak up in meetings</th>
             <td><input type="radio" name="entry.1642875400" value="Not confident at all" required></td>
-            <td><input type="radio" name="entry.366340186" value="Not confident"></td>
-            <td><input type="radio" name="entry.880431258" value="Neutral"></td>
-            <td><input type="radio" name="entry.1716974479" value="Confident"></td>
-            <td><input type="radio" name="entry.754533098" value="Very confident"></td>
+            <td><input type="radio" name="entry.1642875400" value="Not confident"></td>
+            <td><input type="radio" name="entry.1642875400" value="Neutral"></td>
+            <td><input type="radio" name="entry.1642875400" value="Confident"></td>
+            <td><input type="radio" name="entry.1642875400" value="Very confident"></td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div style="padding:12px; border-top:1px solid var(--header-border); display:flex; gap:8px; justify-content:flex-end;">
+    <!-- ===== Likert Matrix 2: Comfort (sticky header) ===== -->
+    <div class="likert-wrap" role="region" aria-label="Comfort matrix" style="overflow:auto; flex:1 1 auto; border-bottom:1px solid var(--header-border);">
+      <table class="likert" style="width:100%; border-collapse:separate; border-spacing:0;">
+        <thead style="position:sticky; top:0; background:#fff; z-index:1; box-shadow:0 1px 0 var(--header-border);">
+          <tr>
+            <th style="text-align:left; padding:12px;">Statement</th>
+            <th>Not comfortable at all</th>
+            <th>Not comfortable</th>
+            <th>Neutral</th>
+            <th>Comfortable</th>
+            <th>Very comfortable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th style="text-align:left; padding:10px 12px;">Comfort item A</th>
+            <td><input type="radio" name="entry.1210679953" value="Not comfortable at all"></td>
+            <td><input type="radio" name="entry.1210679953" value="Not comfortable"></td>
+            <td><input type="radio" name="entry.1210679953" value="Neutral"></td>
+            <td><input type="radio" name="entry.1210679953" value="Comfortable"></td>
+            <td><input type="radio" name="entry.1210679953" value="Very comfortable"></td>
+          </tr>
+          <tr>
+            <th style="text-align:left; padding:10px 12px;">Comfort item B</th>
+            <td><input type="radio" name="entry.208234539" value="Not comfortable at all"></td>
+            <td><input type="radio" name="entry.208234539" value="Not comfortable"></td>
+            <td><input type="radio" name="entry.208234539" value="Neutral"></td>
+            <td><input type="radio" name="entry.208234539" value="Comfortable"></td>
+            <td><input type="radio" name="entry.208234539" value="Very comfortable"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===== Preparedness scale (single row with reversed labels you provided) ===== -->
+    <div style="padding:12px 14px; border-bottom:1px solid var(--header-border);">
+      <div style="font-weight:600; margin-bottom:8px;">Overall, how prepared do you feel?</div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <label><input type="radio" name="entry.1262421595" value="Very prepared"> Very prepared</label>
+        <label><input type="radio" name="entry.1262421595" value="Prepared"> Prepared</label>
+        <label><input type="radio" name="entry.1262421595" value="Neutral"> Neutral</label>
+        <label><input type="radio" name="entry.1262421595" value="Unprepared"> Unprepared</label>
+        <label><input type="radio" name="entry.1262421595" value="Very unprepared"> Very unprepared</label>
+      </div>
+    </div>
+
+    <!-- ===== Multiple choice examples (from your URL tail) ===== -->
+    <div style="padding:12px 14px; border-bottom:1px solid var(--header-border);">
+      <div style="font-weight:600; margin-bottom:8px;">Employment status</div>
+      <label><input type="radio" name="entry.701405359" value="Currently working a paid job in the US"> Currently working a paid job in the US</label>
+      <!-- add other options here if your form has them -->
+    </div>
+
+    <div style="padding:12px 14px; border-bottom:1px solid var(--header-border);">
+      <div style="font-weight:600; margin-bottom:8px;">Time in the US</div>
+      <label><input type="radio" name="entry.289512328" value="6 months - 1 year"> 6 months - 1 year</label>
+      <!-- add other options to match your form -->
+    </div>
+
+    <!-- ===== Submit bar ===== -->
+    <div style="padding:12px 14px; display:flex; gap:8px; justify-content:flex-end;">
       <button class="btn secondary" type="button" id="clearForm">Clear</button>
       <button class="btn" type="submit">Submit</button>
     </div>
+
   </form>
 </section>
 
 <style>
   .likert th, .likert td { padding:10px; text-align:center; border-bottom:1px solid var(--header-border); }
-  .likert th[scope="row"], .likert th { text-align:left; }
+  .likert th { text-align:left; }
   .likert input[type="radio"] { width:18px; height:18px; }
 </style>
 
 <script>
+  // Clear all radios quickly
   document.getElementById('clearForm')?.addEventListener('click', () => {
-    document.querySelectorAll('#likertForm input[type="radio"]').forEach(el => el.checked = false);
+    document.querySelectorAll('#customForm input[type="radio"]').forEach(el => el.checked = false);
+    document.querySelectorAll('#customForm input[type="text"]').forEach(el => el.value = '');
   });
 </script>
