@@ -11,7 +11,7 @@
     }
     html,body{
       height:100%; margin:0; background:#fafafa; color:var(--text);
-      font-family:system-ui,-apple-system,Sego e UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
     }
     /* Sticky site header */
     .site-header{position:fixed; top:0; left:0; right:0; z-index:1000; display:flex; align-items:center; justify-content:space-between; gap:12px;
@@ -30,44 +30,13 @@
     .small{color:var(--muted);font-size:13px}
     .field{display:grid;gap:8px;margin-bottom:14px}
     .field input[type="text"]{padding:10px 12px;border:1px solid var(--header-border);border-radius:8px;width:100%}
-
     /* Likert with sticky column headers */
     .likert-wrap{overflow:auto; max-height:70vh}
     .likert{width:100%; border-collapse:separate; border-spacing:0}
     .likert thead{position:sticky; top:0; background:#fff; z-index:1; box-shadow:0 1px 0 var(--header-border)}
     .likert th,.likert td{padding:10px;text-align:center;border-bottom:1px solid var(--header-border)}
     .likert th:first-child{text-align:left}
-    /* Sticky first column (statement) */
-    .likert th:first-child,
-    .likert td:first-child{
-      position:sticky; left:0; background:#fff; z-index:2;
-      box-shadow:1px 0 0 var(--header-border);
-      text-align:left; min-width:240px;
-    }
-
-    /* Section meta badges */
-    .section-meta{display:flex;gap:8px;align-items:center;padding:0 18px 10px}
-    .badge{display:inline-block;border:1px solid var(--header-border);border-radius:999px;padding:2px 8px;font-size:12px;color:var(--muted)}
-
-    /* Submit guard / missing highlight and toast */
-    .missing{outline:2px solid #e11d48; outline-offset:-2px; border-radius:8px}
-    .toast{position:fixed;right:16px;bottom:16px;background:#111;color:#fff;padding:10px 12px;border-radius:8px;opacity:.95;z-index:2000}
-
-    /* A11y focus ring */
-    :focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:6px}
-
-    /* Dark mode */
-    @media (prefers-color-scheme: dark){
-      :root{ --header-bg:#0b0b0b; --header-border:#222; --text:#ececec; --muted:#aaa; }
-      body{ background:#0e0e0e; }
-      .card{ background:#121212; box-shadow:0 6px 24px rgba(0,0,0,.4) }
-      .btn.secondary{ color:#caddff; border-color:#2d5fd7 }
-      .likert thead{ background:#121212 }
-      .likert th:first-child, .likert td:first-child{ background:#121212 }
-    }
-
-    /* Screen-reader-only helper */
-    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    .controls{display:flex;gap:8px;justify-content:flex-end;padding:12px 18px;border-top:1px solid var(--header-border)}
   </style>
 </head>
 <body>
@@ -77,11 +46,10 @@
       <div class="brand-logo" aria-hidden="true"></div>
       <div>
         <div class="brand-title">NICE Pre-Apprenticeship for Life and Work Program</div>
-        <small class="brand-sub">Sticky matrix headers • Autosave • Keyboard shortcuts</small>
+        <small class="brand-sub">Sticky matrix headers • Submits to Google Forms</small>
       </div>
     </div>
-    <nav style="display:flex;gap:8px;align-items:center">
-      <button id="theme" class="btn secondary" type="button" aria-pressed="false" aria-label="Toggle dark mode">Theme</button>
+    <nav>
       <button id="clearAll" class="btn secondary" type="button">Clear</button>
       <button form="survey" class="btn" type="submit">Submit</button>
     </nav>
@@ -105,17 +73,8 @@
       </div>
     </section>
 
-    <!-- Custom Thank You (hidden by default) -->
-    <section id="thanks" class="card" style="display:none;margin:16px">
-      <header>Thanks!</header>
-      <div class="content">Your responses were submitted. You may close this tab or start the next step.</div>
-    </section>
-
-    <!-- Hidden iframe to keep user on page after submit -->
-    <iframe name="hidden_submit" id="hidden_submit" title="submission frame" class="sr-only"></iframe>
-
     <!-- Survey form -->
-    <form id="survey" method="POST" target="hidden_submit"
+    <form id="survey" method="POST"
       action="https://docs.google.com/forms/d/e/1FAIpQLSdI6Y97Fkbfm6ev2A4nZis1-yuuhgOVkk9vJ8fSgsDvXa63Dg/formResponse">
 
       <!-- Free response -->
@@ -136,450 +95,432 @@
       <!-- Workplace confidence (21 rows) -->
       <section class="card" aria-labelledby="work">
         <header id="work">Workplace confidence</header>
-        <div class="section-meta"><span class="badge" id="work-progress">0/0</span><span class="badge" id="work-left">0 left</span></div>
-        <fieldset aria-describedby="work-desc" style="border:0;padding:0;margin:0">
-          <legend class="sr-only">Workplace confidence</legend>
-          <div id="work-desc" class="content small">
-            For the question below, imagine that you have just gotten a job here in the US. Also imagine that the job starts tomorrow. You really want to make a good impression.
-            <br>Read each of the following and rate how confident you are in your ability to do each right now:
-          </div>
-          <div class="likert-wrap">
-            <table class="likert">
-              <thead>
-                <tr>
-                  <th scope="col">Statement</th>
-                  <th scope="col">Not confident at all</th><th scope="col">Not confident</th><th scope="col">Neutral</th><th scope="col">Confident</th><th scope="col">Very confident</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row" tabindex="0">Show my boss that I am a good listener</th>
-                  <td><input type="radio" name="entry.1318978031" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.1318978031" value="Not confident"></td>
-                  <td><input type="radio" name="entry.1318978031" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1318978031" value="Confident"></td>
-                  <td><input type="radio" name="entry.1318978031" value="Very confident"></td></tr>
+        <div class="content small">
+          For the question below, imagine that you have just gotten a job here in the US. Also imagine that the job starts tomorrow. You really want to make a good impression.
+          <br>Read each of the following and rate how confident you are in your ability to do each right now:
+        </div>
+        <div class="likert-wrap">
+          <table class="likert">
+            <thead>
+              <tr>
+                <th>Statement</th>
+                <th>Not confident at all</th><th>Not confident</th><th>Neutral</th><th>Confident</th><th>Very confident</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th>Show my boss that I am a good listener</th>
+                <td><input type="radio" name="entry.1318978031" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1318978031" value="Not confident"></td>
+                <td><input type="radio" name="entry.1318978031" value="Neutral"></td>
+                <td><input type="radio" name="entry.1318978031" value="Confident"></td>
+                <td><input type="radio" name="entry.1318978031" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Collaborate effectively with my new colleagues</th>
-                  <td><input type="radio" name="entry.189709654" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.189709654" value="Not confident"></td>
-                  <td><input type="radio" name="entry.189709654" value="Neutral"></td>
-                  <td><input type="radio" name="entry.189709654" value="Confident"></td>
-                  <td><input type="radio" name="entry.189709654" value="Very confident"></td></tr>
+              <tr><th>Collaborate effectively with my new colleagues</th>
+                <td><input type="radio" name="entry.189709654" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.189709654" value="Not confident"></td>
+                <td><input type="radio" name="entry.189709654" value="Neutral"></td>
+                <td><input type="radio" name="entry.189709654" value="Confident"></td>
+                <td><input type="radio" name="entry.189709654" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Ask my colleagues a question if I am uncertain about something</th>
-                  <td><input type="radio" name="entry.248390294" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.248390294" value="Not confident"></td>
-                  <td><input type="radio" name="entry.248390294" value="Neutral"></td>
-                  <td><input type="radio" name="entry.248390294" value="Confident"></td>
-                  <td><input type="radio" name="entry.248390294" value="Very confident"></td></tr>
+              <tr><th>Ask my colleagues a question if I am uncertain about something</th>
+                <td><input type="radio" name="entry.248390294" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.248390294" value="Not confident"></td>
+                <td><input type="radio" name="entry.248390294" value="Neutral"></td>
+                <td><input type="radio" name="entry.248390294" value="Confident"></td>
+                <td><input type="radio" name="entry.248390294" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Ask my boss a question if I am uncertain about something</th>
-                  <td><input type="radio" name="entry.859281005" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.859281005" value="Not confident"></td>
-                  <td><input type="radio" name="entry.859281005" value="Neutral"></td>
-                  <td><input type="radio" name="entry.859281005" value="Confident"></td>
-                  <td><input type="radio" name="entry.859281005" value="Very confident"></td></tr>
+              <tr><th>Ask my boss a question if I am uncertain about something</th>
+                <td><input type="radio" name="entry.859281005" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.859281005" value="Not confident"></td>
+                <td><input type="radio" name="entry.859281005" value="Neutral"></td>
+                <td><input type="radio" name="entry.859281005" value="Confident"></td>
+                <td><input type="radio" name="entry.859281005" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Generate multiple solutions to a problem</th>
-                  <td><input type="radio" name="entry.1647226302" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.1647226302" value="Not confident"></td>
-                  <td><input type="radio" name="entry.1647226302" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1647226302" value="Confident"></td>
-                  <td><input type="radio" name="entry.1647226302" value="Very confident"></td></tr>
+              <tr><th>Generate multiple solutions to a problem</th>
+                <td><input type="radio" name="entry.1647226302" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1647226302" value="Not confident"></td>
+                <td><input type="radio" name="entry.1647226302" value="Neutral"></td>
+                <td><input type="radio" name="entry.1647226302" value="Confident"></td>
+                <td><input type="radio" name="entry.1647226302" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Manage my time efficiently to meet all my deadlines</th>
-                  <td><input type="radio" name="entry.479648666" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.479648666" value="Not confident"></td>
-                  <td><input type="radio" name="entry.479648666" value="Neutral"></td>
-                  <td><input type="radio" name="entry.479648666" value="Confident"></td>
-                  <td><input type="radio" name="entry.479648666" value="Very confident"></td></tr>
+              <tr><th>Manage my time efficiently to meet all my deadlines</th>
+                <td><input type="radio" name="entry.479648666" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.479648666" value="Not confident"></td>
+                <td><input type="radio" name="entry.479648666" value="Neutral"></td>
+                <td><input type="radio" name="entry.479648666" value="Confident"></td>
+                <td><input type="radio" name="entry.479648666" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Show my boss that I have a good work ethic</th>
-                  <td><input type="radio" name="entry.979305097" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.979305097" value="Not confident"></td>
-                  <td><input type="radio" name="entry.979305097" value="Neutral"></td>
-                  <td><input type="radio" name="entry.979305097" value="Confident"></td>
-                  <td><input type="radio" name="entry.979305097" value="Very confident"></td></tr>
+              <tr><th>Show my boss that I have a good work ethic</th>
+                <td><input type="radio" name="entry.979305097" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.979305097" value="Not confident"></td>
+                <td><input type="radio" name="entry.979305097" value="Neutral"></td>
+                <td><input type="radio" name="entry.979305097" value="Confident"></td>
+                <td><input type="radio" name="entry.979305097" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Show my colleagues that I have a good work ethic</th>
-                  <td><input type="radio" name="entry.866801450" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.866801450" value="Not confident"></td>
-                  <td><input type="radio" name="entry.866801450" value="Neutral"></td>
-                  <td><input type="radio" name="entry.866801450" value="Confident"></td>
-                  <td><input type="radio" name="entry.866801450" value="Very confident"></td></tr>
+              <tr><th>Show my colleagues that I have a good work ethic</th>
+                <td><input type="radio" name="entry.866801450" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.866801450" value="Not confident"></td>
+                <td><input type="radio" name="entry.866801450" value="Neutral"></td>
+                <td><input type="radio" name="entry.866801450" value="Confident"></td>
+                <td><input type="radio" name="entry.866801450" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Work with my colleagues to solve problems</th>
-                  <td><input type="radio" name="entry.713283654" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.713283654" value="Not confident"></td>
-                  <td><input type="radio" name="entry.713283654" value="Neutral"></td>
-                  <td><input type="radio" name="entry.713283654" value="Confident"></td>
-                  <td><input type="radio" name="entry.713283654" value="Very confident"></td></tr>
+              <tr><th>Work with my colleagues to solve problems</th>
+                <td><input type="radio" name="entry.713283654" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.713283654" value="Not confident"></td>
+                <td><input type="radio" name="entry.713283654" value="Neutral"></td>
+                <td><input type="radio" name="entry.713283654" value="Confident"></td>
+                <td><input type="radio" name="entry.713283654" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Analyze what tasks are priorities</th>
-                  <td><input type="radio" name="entry.233246761" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.233246761" value="Not confident"></td>
-                  <td><input type="radio" name="entry.233246761" value="Neutral"></td>
-                  <td><input type="radio" name="entry.233246761" value="Confident"></td>
-                  <td><input type="radio" name="entry.233246761" value="Very confident"></td></tr>
+              <tr><th>Analyze what tasks are priorities</th>
+                <td><input type="radio" name="entry.233246761" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.233246761" value="Not confident"></td>
+                <td><input type="radio" name="entry.233246761" value="Neutral"></td>
+                <td><input type="radio" name="entry.233246761" value="Confident"></td>
+                <td><input type="radio" name="entry.233246761" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Inspire my colleagues</th>
-                  <td><input type="radio" name="entry.1651807369" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.1651807369" value="Not confident"></td>
-                  <td><input type="radio" name="entry.1651807369" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1651807369" value="Confident"></td>
-                  <td><input type="radio" name="entry.1651807369" value="Very confident"></td></tr>
+              <tr><th>Inspire my colleagues</th>
+                <td><input type="radio" name="entry.1651807369" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1651807369" value="Not confident"></td>
+                <td><input type="radio" name="entry.1651807369" value="Neutral"></td>
+                <td><input type="radio" name="entry.1651807369" value="Confident"></td>
+                <td><input type="radio" name="entry.1651807369" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Motivate my colleagues</th>
-                  <td><input type="radio" name="entry.111198674" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.111198674" value="Not confident"></td>
-                  <td><input type="radio" name="entry.111198674" value="Neutral"></td>
-                  <td><input type="radio" name="entry.111198674" value="Confident"></td>
-                  <td><input type="radio" name="entry.111198674" value="Very confident"></td></tr>
+              <tr><th>Motivate my colleagues</th>
+                <td><input type="radio" name="entry.111198674" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.111198674" value="Not confident"></td>
+                <td><input type="radio" name="entry.111198674" value="Neutral"></td>
+                <td><input type="radio" name="entry.111198674" value="Confident"></td>
+                <td><input type="radio" name="entry.111198674" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Convey to my colleagues that I understand what they are saying to me</th>
-                  <td><input type="radio" name="entry.1640697353" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.1640697353" value="Not confident"></td>
-                  <td><input type="radio" name="entry.1640697353" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1640697353" value="Confident"></td>
-                  <td><input type="radio" name="entry.1640697353" value="Very confident"></td></tr>
+              <tr><th>Convey to my colleagues that I understand what they are saying to me</th>
+                <td><input type="radio" name="entry.1640697353" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1640697353" value="Not confident"></td>
+                <td><input type="radio" name="entry.1640697353" value="Neutral"></td>
+                <td><input type="radio" name="entry.1640697353" value="Confident"></td>
+                <td><input type="radio" name="entry.1640697353" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Convey to my boss that I understand what they are saying to me</th>
-                  <td><input type="radio" name="entry.1258675032" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.1258675032" value="Not confident"></td>
-                  <td><input type="radio" name="entry.1258675032" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1258675032" value="Confident"></td>
-                  <td><input type="radio" name="entry.1258675032" value="Very confident"></td></tr>
+              <tr><th>Convey to my boss that I understand what they are saying to me</th>
+                <td><input type="radio" name="entry.1258675032" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1258675032" value="Not confident"></td>
+                <td><input type="radio" name="entry.1258675032" value="Neutral"></td>
+                <td><input type="radio" name="entry.1258675032" value="Confident"></td>
+                <td><input type="radio" name="entry.1258675032" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Keep my workspace/materials organized</th>
-                  <td><input type="radio" name="entry.1860705415" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.1860705415" value="Not confident"></td>
-                  <td><input type="radio" name="entry.1860705415" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1860705415" value="Confident"></td>
-                  <td><input type="radio" name="entry.1860705415" value="Very confident"></td></tr>
+              <tr><th>Keep my workspace/materials organized</th>
+                <td><input type="radio" name="entry.1860705415" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1860705415" value="Not confident"></td>
+                <td><input type="radio" name="entry.1860705415" value="Neutral"></td>
+                <td><input type="radio" name="entry.1860705415" value="Confident"></td>
+                <td><input type="radio" name="entry.1860705415" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Show my colleagues that I respect them</th>
-                  <td><input type="radio" name="entry.178717278" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.178717278" value="Not confident"></td>
-                  <td><input type="radio" name="entry.178717278" value="Neutral"></td>
-                  <td><input type="radio" name="entry.178717278" value="Confident"></td>
-                  <td><input type="radio" name="entry.178717278" value="Very confident"></td></tr>
+              <tr><th>Show my colleagues that I respect them</th>
+                <td><input type="radio" name="entry.178717278" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.178717278" value="Not confident"></td>
+                <td><input type="radio" name="entry.178717278" value="Neutral"></td>
+                <td><input type="radio" name="entry.178717278" value="Confident"></td>
+                <td><input type="radio" name="entry.178717278" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Show my boss that I respect them</th>
-                  <td><input type="radio" name="entry.579681165" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.579681165" value="Not confident"></td>
-                  <td><input type="radio" name="entry.579681165" value="Neutral"></td>
-                  <td><input type="radio" name="entry.579681165" value="Confident"></td>
-                  <td><input type="radio" name="entry.579681165" value="Very confident"></td></tr>
+              <tr><th>Show my boss that I respect them</th>
+                <td><input type="radio" name="entry.579681165" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.579681165" value="Not confident"></td>
+                <td><input type="radio" name="entry.579681165" value="Neutral"></td>
+                <td><input type="radio" name="entry.579681165" value="Confident"></td>
+                <td><input type="radio" name="entry.579681165" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Succeed at the job</th>
-                  <td><input type="radio" name="entry.767490314" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.767490314" value="Not confident"></td>
-                  <td><input type="radio" name="entry.767490314" value="Neutral"></td>
-                  <td><input type="radio" name="entry.767490314" value="Confident"></td>
-                  <td><input type="radio" name="entry.767490314" value="Very confident"></td></tr>
+              <tr><th>Succeed at the job</th>
+                <td><input type="radio" name="entry.767490314" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.767490314" value="Not confident"></td>
+                <td><input type="radio" name="entry.767490314" value="Neutral"></td>
+                <td><input type="radio" name="entry.767490314" value="Confident"></td>
+                <td><input type="radio" name="entry.767490314" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Be seen as a reliable employee</th>
-                  <td><input type="radio" name="entry.1282440325" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.1282440325" value="Not confident"></td>
-                  <td><input type="radio" name="entry.1282440325" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1282440325" value="Confident"></td>
-                  <td><input type="radio" name="entry.1282440325" value="Very confident"></td></tr>
+              <tr><th>Be seen as a reliable employee</th>
+                <td><input type="radio" name="entry.1282440325" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1282440325" value="Not confident"></td>
+                <td><input type="radio" name="entry.1282440325" value="Neutral"></td>
+                <td><input type="radio" name="entry.1282440325" value="Confident"></td>
+                <td><input type="radio" name="entry.1282440325" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Step up as a leader when necessary</th>
-                  <td><input type="radio" name="entry.63498692" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.63498692" value="Not confident"></td>
-                  <td><input type="radio" name="entry.63498692" value="Neutral"></td>
-                  <td><input type="radio" name="entry.63498692" value="Confident"></td>
-                  <td><input type="radio" name="entry.63498692" value="Very confident"></td></tr>
+              <tr><th>Step up as a leader when necessary</th>
+                <td><input type="radio" name="entry.63498692" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.63498692" value="Not confident"></td>
+                <td><input type="radio" name="entry.63498692" value="Neutral"></td>
+                <td><input type="radio" name="entry.63498692" value="Confident"></td>
+                <td><input type="radio" name="entry.63498692" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Work with my colleagues as a team player</th>
-                  <td><input type="radio" name="entry.1331580161" value="Not confident at all" required></td>
-                  <td><input type="radio" name="entry.1331580161" value="Not confident"></td>
-                  <td><input type="radio" name="entry.1331580161" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1331580161" value="Confident"></td>
-                  <td><input type="radio" name="entry.1331580161" value="Very confident"></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </fieldset>
+              <tr><th>Work with my colleagues as a team player</th>
+                <td><input type="radio" name="entry.1331580161" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1331580161" value="Not confident"></td>
+                <td><input type="radio" name="entry.1331580161" value="Neutral"></td>
+                <td><input type="radio" name="entry.1331580161" value="Confident"></td>
+                <td><input type="radio" name="entry.1331580161" value="Very confident"></td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <!-- NYC organizations/services (8 rows) -->
       <section class="card" aria-labelledby="orgs">
         <header id="orgs">NYC organizations and services</header>
-        <div class="section-meta"><span class="badge" id="orgs-progress">0/0</span><span class="badge" id="orgs-left">0 left</span></div>
-        <fieldset style="border:0;padding:0;margin:0">
-          <legend class="sr-only">NYC organizations and services</legend>
-          <div class="content small">Think about how confident you are to navigate each of the following right now:</div>
-          <div class="likert-wrap">
-            <table class="likert">
-              <thead>
-                <tr>
-                  <th scope="col">Organization / service</th>
-                  <th scope="col">Not confident at all</th><th scope="col">Not confident</th><th scope="col">Neutral</th><th scope="col">Confident</th><th scope="col">Very confident</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row" tabindex="0">NY State Department of Motor Vehicles</th>
-                  <td><input type="radio" name="entry.366340186" value="Not confident at all"></td>
-                  <td><input type="radio" name="entry.366340186" value="Not confident"></td>
-                  <td><input type="radio" name="entry.366340186" value="Neutral"></td>
-                  <td><input type="radio" name="entry.366340186" value="Confident"></td>
-                  <td><input type="radio" name="entry.366340186" value="Very confident"></td></tr>
+        <div class="content small">Think about how confident you are to navigate each of the following right now:</div>
+        <div class="likert-wrap">
+          <table class="likert">
+            <thead>
+              <tr>
+                <th>Organization / service</th>
+                <th>Not confident at all</th><th>Not confident</th><th>Neutral</th><th>Confident</th><th>Very confident</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th>NY State Department of Motor Vehicles</th>
+                <td><input type="radio" name="entry.366340186" value="Not confident at all"></td>
+                <td><input type="radio" name="entry.366340186" value="Not confident"></td>
+                <td><input type="radio" name="entry.366340186" value="Neutral"></td>
+                <td><input type="radio" name="entry.366340186" value="Confident"></td>
+                <td><input type="radio" name="entry.366340186" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Health insurance services</th>
-                  <td><input type="radio" name="entry.880431258" value="Not confident at all"></td>
-                  <td><input type="radio" name="entry.880431258" value="Not confident"></td>
-                  <td><input type="radio" name="entry.880431258" value="Neutral"></td>
-                  <td><input type="radio" name="entry.880431258" value="Confident"></td>
-                  <td><input type="radio" name="entry.880431258" value="Very confident"></td></tr>
+              <tr><th>Health insurance services</th>
+                <td><input type="radio" name="entry.880431258" value="Not confident at all"></td>
+                <td><input type="radio" name="entry.880431258" value="Not confident"></td>
+                <td><input type="radio" name="entry.880431258" value="Neutral"></td>
+                <td><input type="radio" name="entry.880431258" value="Confident"></td>
+                <td><input type="radio" name="entry.880431258" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">NYC public transportation</th>
-                  <td><input type="radio" name="entry.1716974479" value="Not confident at all"></td>
-                  <td><input type="radio" name="entry.1716974479" value="Not confident"></td>
-                  <td><input type="radio" name="entry.1716974479" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1716974479" value="Confident"></td>
-                  <td><input type="radio" name="entry.1716974479" value="Very confident"></td></tr>
+              <tr><th>NYC public transportation</th>
+                <td><input type="radio" name="entry.1716974479" value="Not confident at all"></td>
+                <td><input type="radio" name="entry.1716974479" value="Not confident"></td>
+                <td><input type="radio" name="entry.1716974479" value="Neutral"></td>
+                <td><input type="radio" name="entry.1716974479" value="Confident"></td>
+                <td><input type="radio" name="entry.1716974479" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Banks</th>
-                  <td><input type="radio" name="entry.754533098" value="Not confident at all"></td>
-                  <td><input type="radio" name="entry.754533098" value="Not confident"></td>
-                  <td><input type="radio" name="entry.754533098" value="Neutral"></td>
-                  <td><input type="radio" name="entry.754533098" value="Confident"></td>
-                  <td><input type="radio" name="entry.754533098" value="Very confident"></td></tr>
+              <tr><th>Banks</th>
+                <td><input type="radio" name="entry.754533098" value="Not confident at all"></td>
+                <td><input type="radio" name="entry.754533098" value="Not confident"></td>
+                <td><input type="radio" name="entry.754533098" value="Neutral"></td>
+                <td><input type="radio" name="entry.754533098" value="Confident"></td>
+                <td><input type="radio" name="entry.754533098" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Public housing services</th>
-                  <td><input type="radio" name="entry.2019971695" value="Not confident at all"></td>
-                  <td><input type="radio" name="entry.2019971695" value="Not confident"></td>
-                  <td><input type="radio" name="entry.2019971695" value="Neutral"></td>
-                  <td><input type="radio" name="entry.2019971695" value="Confident"></td>
-                  <td><input type="radio" name="entry.2019971695" value="Very confident"></td></tr>
+              <tr><th>Public housing services</th>
+                <td><input type="radio" name="entry.2019971695" value="Not confident at all"></td>
+                <td><input type="radio" name="entry.2019971695" value="Not confident"></td>
+                <td><input type="radio" name="entry.2019971695" value="Neutral"></td>
+                <td><input type="radio" name="entry.2019971695" value="Confident"></td>
+                <td><input type="radio" name="entry.2019971695" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Immigration Services</th>
-                  <td><input type="radio" name="entry.108584485" value="Not confident at all"></td>
-                  <td><input type="radio" name="entry.108584485" value="Not confident"></td>
-                  <td><input type="radio" name="entry.108584485" value="Neutral"></td>
-                  <td><input type="radio" name="entry.108584485" value="Confident"></td>
-                  <td><input type="radio" name="entry.108584485" value="Very confident"></td></tr>
+              <tr><th>Immigration Services</th>
+                <td><input type="radio" name="entry.108584485" value="Not confident at all"></td>
+                <td><input type="radio" name="entry.108584485" value="Not confident"></td>
+                <td><input type="radio" name="entry.108584485" value="Neutral"></td>
+                <td><input type="radio" name="entry.108584485" value="Confident"></td>
+                <td><input type="radio" name="entry.108584485" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Public Libraries</th>
-                  <td><input type="radio" name="entry.829625071" value="Not confident at all"></td>
-                  <td><input type="radio" name="entry.829625071" value="Not confident"></td>
-                  <td><input type="radio" name="entry.829625071" value="Neutral"></td>
-                  <td><input type="radio" name="entry.829625071" value="Confident"></td>
-                  <td><input type="radio" name="entry.829625071" value="Very confident"></td></tr>
+              <tr><th>Public Libraries</th>
+                <td><input type="radio" name="entry.829625071" value="Not confident at all"></td>
+                <td><input type="radio" name="entry.829625071" value="Not confident"></td>
+                <td><input type="radio" name="entry.829625071" value="Neutral"></td>
+                <td><input type="radio" name="entry.829625071" value="Confident"></td>
+                <td><input type="radio" name="entry.829625071" value="Very confident"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Department of Labor</th>
-                  <td><input type="radio" name="entry.1600243474" value="Not confident at all"></td>
-                  <td><input type="radio" name="entry.1600243474" value="Not confident"></td>
-                  <td><input type="radio" name="entry.1600243474" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1600243474" value="Confident"></td>
-                  <td><input type="radio" name="entry.1600243474" value="Very confident"></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </fieldset>
+              <tr><th>Department of Labor</th>
+                <td><input type="radio" name="entry.1600243474" value="Not confident at all"></td>
+                <td><input type="radio" name="entry.1600243474" value="Not confident"></td>
+                <td><input type="radio" name="entry.1600243474" value="Neutral"></td>
+                <td><input type="radio" name="entry.1600243474" value="Confident"></td>
+                <td><input type="radio" name="entry.1600243474" value="Very confident"></td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <!-- Comfort understanding (14 rows) -->
       <section class="card" aria-labelledby="comfort">
         <header id="comfort">Comfort understanding</header>
-        <div class="section-meta"><span class="badge" id="comfort-progress">0/0</span><span class="badge" id="comfort-left">0 left</span></div>
-        <fieldset style="border:0;padding:0;margin:0">
-          <legend class="sr-only">Comfort understanding</legend>
-          <div class="content small">Look at the list below and think about how comfortable you are understanding each of them:</div>
-          <div class="likert-wrap">
-            <table class="likert">
-              <thead>
-                <tr>
-                  <th scope="col">Topic</th>
-                  <th scope="col">Not comfortable at all</th><th scope="col">Not comfortable</th><th scope="col">Neutral</th><th scope="col">Comfortable</th><th scope="col">Very comfortable</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row" tabindex="0">My legal rights in the US</th>
-                  <td><input type="radio" name="entry.523712851" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.523712851" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.523712851" value="Neutral"></td>
-                  <td><input type="radio" name="entry.523712851" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.523712851" value="Very comfortable"></td></tr>
+        <div class="content small">Look at the list below and think about how comfortable you are understanding each of them:</div>
+        <div class="likert-wrap">
+          <table class="likert">
+            <thead>
+              <tr>
+                <th>Topic</th>
+                <th>Not comfortable at all</th><th>Not comfortable</th><th>Neutral</th><th>Comfortable</th><th>Very comfortable</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th>My legal rights in the US</th>
+                <td><input type="radio" name="entry.523712851" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.523712851" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.523712851" value="Neutral"></td>
+                <td><input type="radio" name="entry.523712851" value="Comfortable"></td>
+                <td><input type="radio" name="entry.523712851" value="Very comfortable"></td></tr>
 
-                <tr><th scope="row" tabindex="0">My legal rights in NYC</th>
-                  <td><input type="radio" name="entry.1433219254" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.1433219254" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.1433219254" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1433219254" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.1433219254" value="Very comfortable"></td></tr>
+              <tr><th>My legal rights in NYC</th>
+                <td><input type="radio" name="entry.1433219254" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.1433219254" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.1433219254" value="Neutral"></td>
+                <td><input type="radio" name="entry.1433219254" value="Comfortable"></td>
+                <td><input type="radio" name="entry.1433219254" value="Very comfortable"></td></tr>
 
-                <tr><th scope="row" tabindex="0">The various types of state and city IDs available</th>
-                  <td><input type="radio" name="entry.800255012" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.800255012" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.800255012" value="Neutral"></td>
-                  <td><input type="radio" name="entry.800255012" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.800255012" value="Very comfortable"></td></tr>
+              <tr><th>The various types of state and city IDs available</th>
+                <td><input type="radio" name="entry.800255012" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.800255012" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.800255012" value="Neutral"></td>
+                <td><input type="radio" name="entry.800255012" value="Comfortable"></td>
+                <td><input type="radio" name="entry.800255012" value="Very comfortable"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Using the internet to find jobs</th>
-                  <td><input type="radio" name="entry.50822816" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.50822816" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.50822816" value="Neutral"></td>
-                  <td><input type="radio" name="entry.50822816" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.50822816" value="Very comfortable"></td></tr>
+              <tr><th>Using the internet to find jobs</th>
+                <td><input type="radio" name="entry.50822816" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.50822816" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.50822816" value="Neutral"></td>
+                <td><input type="radio" name="entry.50822816" value="Comfortable"></td>
+                <td><input type="radio" name="entry.50822816" value="Very comfortable"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Obtaining a NY state ID</th>
-                  <td><input type="radio" name="entry.1210679953" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.1210679953" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.1210679953" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1210679953" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.1210679953" value="Very comfortable"></td></tr>
+              <tr><th>Obtaining a NY state ID</th>
+                <td><input type="radio" name="entry.1210679953" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.1210679953" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.1210679953" value="Neutral"></td>
+                <td><input type="radio" name="entry.1210679953" value="Comfortable"></td>
+                <td><input type="radio" name="entry.1210679953" value="Very comfortable"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Obtaining a NY state driver's license</th>
-                  <td><input type="radio" name="entry.593385043" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.593385043" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.593385043" value="Neutral"></td>
-                  <td><input type="radio" name="entry.593385043" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.593385043" value="Very comfortable"></td></tr>
+              <tr><th>Obtaining a NY state driver's license</th>
+                <td><input type="radio" name="entry.593385043" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.593385043" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.593385043" value="Neutral"></td>
+                <td><input type="radio" name="entry.593385043" value="Comfortable"></td>
+                <td><input type="radio" name="entry.593385043" value="Very comfortable"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Opening a bank account</th>
-                  <td><input type="radio" name="entry.825293470" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.825293470" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.825293470" value="Neutral"></td>
-                  <td><input type="radio" name="entry.825293470" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.825293470" value="Very comfortable"></td></tr>
+              <tr><th>Opening a bank account</th>
+                <td><input type="radio" name="entry.825293470" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.825293470" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.825293470" value="Neutral"></td>
+                <td><input type="radio" name="entry.825293470" value="Comfortable"></td>
+                <td><input type="radio" name="entry.825293470" value="Very comfortable"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Obtaining a library card</th>
-                  <td><input type="radio" name="entry.1212986509" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.1212986509" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.1212986509" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1212986509" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.1212986509" value="Very comfortable"></td></tr>
+              <tr><th>Obtaining a library card</th>
+                <td><input type="radio" name="entry.1212986509" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.1212986509" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.1212986509" value="Neutral"></td>
+                <td><input type="radio" name="entry.1212986509" value="Comfortable"></td>
+                <td><input type="radio" name="entry.1212986509" value="Very comfortable"></td></tr>
 
-                <tr><th scope="row" tabindex="0">LinkNYC</th>
-                  <td><input type="radio" name="entry.492336221" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.492336221" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.492336221" value="Neutral"></td>
-                  <td><input type="radio" name="entry.492336221" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.492336221" value="Very comfortable"></td></tr>
+              <tr><th>LinkNYC</th>
+                <td><input type="radio" name="entry.492336221" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.492336221" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.492336221" value="Neutral"></td>
+                <td><input type="radio" name="entry.492336221" value="Comfortable"></td>
+                <td><input type="radio" name="entry.492336221" value="Very comfortable"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Occupational Health and Safety Administration (OSHA) certification</th>
-                  <td><input type="radio" name="entry.208234539" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.208234539" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.208234539" value="Neutral"></td>
-                  <td><input type="radio" name="entry.208234539" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.208234539" value="Very comfortable"></td></tr>
+              <tr><th>Occupational Health and Safety Administration (OSHA) certification</th>
+                <td><input type="radio" name="entry.208234539" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.208234539" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.208234539" value="Neutral"></td>
+                <td><input type="radio" name="entry.208234539" value="Comfortable"></td>
+                <td><input type="radio" name="entry.208234539" value="Very comfortable"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Site Safety Training (SST) certification</th>
-                  <td><input type="radio" name="entry.660511692" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.660511692" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.660511692" value="Neutral"></td>
-                  <td><input type="radio" name="entry.660511692" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.660511692" value="Very comfortable"></td></tr>
+              <tr><th>Site Safety Training (SST) certification</th>
+                <td><input type="radio" name="entry.660511692" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.660511692" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.660511692" value="Neutral"></td>
+                <td><input type="radio" name="entry.660511692" value="Comfortable"></td>
+                <td><input type="radio" name="entry.660511692" value="Very comfortable"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Budgeting personal expenses</th>
-                  <td><input type="radio" name="entry.1675028155" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.1675028155" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.1675028155" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1675028155" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.1675028155" value="Very comfortable"></td></tr>
+              <tr><th>Budgeting personal expenses</th>
+                <td><input type="radio" name="entry.1675028155" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.1675028155" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.1675028155" value="Neutral"></td>
+                <td><input type="radio" name="entry.1675028155" value="Comfortable"></td>
+                <td><input type="radio" name="entry.1675028155" value="Very comfortable"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Health insurance expenses like co-pays and deductibles</th>
-                  <td><input type="radio" name="entry.1202113650" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.1202113650" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.1202113650" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1202113650" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.1202113650" value="Very comfortable"></td></tr>
+              <tr><th>Health insurance expenses like co-pays and deductibles</th>
+                <td><input type="radio" name="entry.1202113650" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.1202113650" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.1202113650" value="Neutral"></td>
+                <td><input type="radio" name="entry.1202113650" value="Comfortable"></td>
+                <td><input type="radio" name="entry.1202113650" value="Very comfortable"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Payroll taxes for various types of employment</th>
-                  <td><input type="radio" name="entry.1834223567" value="Not comfortable at all"></td>
-                  <td><input type="radio" name="entry.1834223567" value="Not comfortable"></td>
-                  <td><input type="radio" name="entry.1834223567" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1834223567" value="Comfortable"></td>
-                  <td><input type="radio" name="entry.1834223567" value="Very comfortable"></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </fieldset>
+              <tr><th>Payroll taxes for various types of employment</th>
+                <td><input type="radio" name="entry.1834223567" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.1834223567" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.1834223567" value="Neutral"></td>
+                <td><input type="radio" name="entry.1834223567" value="Comfortable"></td>
+                <td><input type="radio" name="entry.1834223567" value="Very comfortable"></td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
-      <!-- Preparedness (5 rows) — fixed left→right order -->
+      <!-- Preparedness (5 rows) — fixed left→right order and correct row IDs -->
       <section class="card" aria-labelledby="prep">
         <header id="prep">Preparedness for job activities</header>
-        <div class="section-meta"><span class="badge" id="prep-progress">0/0</span><span class="badge" id="prep-left">0 left</span></div>
-        <fieldset style="border:0;padding:0;margin:0">
-          <legend class="sr-only">Preparedness for job activities</legend>
-          <div class="content small">Below are some activities related to finding and securing a job. Think about how prepared you feel to do each activity right now:</div>
-          <div class="likert-wrap">
-            <table class="likert">
-              <thead>
-                <tr>
-                  <th scope="col">Activity</th>
-                  <th scope="col">Very prepared</th><th scope="col">Prepared</th><th scope="col">Neutral</th><th scope="col">Unprepared</th><th scope="col">Very unprepared</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row" tabindex="0">Prepare my resume</th>
-                  <td><input type="radio" name="entry.376956038" value="Very prepared"></td>
-                  <td><input type="radio" name="entry.376956038" value="Prepared"></td>
-                  <td><input type="radio" name="entry.376956038" value="Neutral"></td>
-                  <td><input type="radio" name="entry.376956038" value="Unprepared"></td>
-                  <td><input type="radio" name="entry.376956038" value="Very unprepared"></td></tr>
+        <div class="content small">Below are some activities related to finding and securing a job. Think about how prepared you feel to do each activity right now:</div>
+        <div class="likert-wrap">
+          <table class="likert">
+            <thead>
+              <tr>
+                <th>Activity</th>
+                <th>Very prepared</th><th>Prepared</th><th>Neutral</th><th>Unprepared</th><th>Very unprepared</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th>Prepare my resume</th>
+                <td><input type="radio" name="entry.1262421595" value="Very prepared"></td>
+                <td><input type="radio" name="entry.1262421595" value="Prepared"></td>
+                <td><input type="radio" name="entry.1262421595" value="Neutral"></td>
+                <td><input type="radio" name="entry.1262421595" value="Unprepared"></td>
+                <td><input type="radio" name="entry.1262421595" value="Very unprepared"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Conduct a job search</th>
-                  <td><input type="radio" name="entry.1671198128" value="Very prepared"></td>
-                  <td><input type="radio" name="entry.1671198128" value="Prepared"></td>
-                  <td><input type="radio" name="entry.1671198128" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1671198128" value="Unprepared"></td>
-                  <td><input type="radio" name="entry.1671198128" value="Very unprepared"></td></tr>
+              <tr><th>Conduct a job search</th>
+                <td><input type="radio" name="entry.173242196" value="Very prepared"></td>
+                <td><input type="radio" name="entry.173242196" value="Prepared"></td>
+                <td><input type="radio" name="entry.173242196" value="Neutral"></td>
+                <td><input type="radio" name="entry.173242196" value="Unprepared"></td>
+                <td><input type="radio" name="entry.173242196" value="Very unprepared"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Discuss my skills and work experience in an interview</th>
-                  <td><input type="radio" name="entry.173242196" value="Very prepared"></td>
-                  <td><input type="radio" name="entry.173242196" value="Prepared"></td>
-                  <td><input type="radio" name="entry.173242196" value="Neutral"></td>
-                  <td><input type="radio" name="entry.173242196" value="Unprepared"></td>
-                  <td><input type="radio" name="entry.173242196" value="Very unprepared"></td></tr>
+              <tr><th>Discuss my skills and work experience in an interview</th>
+                <td><input type="radio" name="entry.1671198128" value="Very prepared"></td>
+                <td><input type="radio" name="entry.1671198128" value="Prepared"></td>
+                <td><input type="radio" name="entry.1671198128" value="Neutral"></td>
+                <td><input type="radio" name="entry.1671198128" value="Unprepared"></td>
+                <td><input type="radio" name="entry.1671198128" value="Very unprepared"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Speak conversational English</th>
-                  <td><input type="radio" name="entry.625390586" value="Very prepared"></td>
-                  <td><input type="radio" name="entry.625390586" value="Prepared"></td>
-                  <td><input type="radio" name="entry.625390586" value="Neutral"></td>
-                  <td><input type="radio" name="entry.625390586" value="Unprepared"></td>
-                  <td><input type="radio" name="entry.625390586" value="Very unprepared"></td></tr>
+              <tr><th>Speak conversational English</th>
+                <td><input type="radio" name="entry.625390586" value="Very prepared"></td>
+                <td><input type="radio" name="entry.625390586" value="Prepared"></td>
+                <td><input type="radio" name="entry.625390586" value="Neutral"></td>
+                <td><input type="radio" name="entry.625390586" value="Unprepared"></td>
+                <td><input type="radio" name="entry.625390586" value="Very unprepared"></td></tr>
 
-                <tr><th scope="row" tabindex="0">Apply for a job</th>
-                  <td><input type="radio" name="entry.1262421595" value="Very prepared"></td>
-                  <td><input type="radio" name="entry.1262421595" value="Prepared"></td>
-                  <td><input type="radio" name="entry.1262421595" value="Neutral"></td>
-                  <td><input type="radio" name="entry.1262421595" value="Unprepared"></td>
-                  <td><input type="radio" name="entry.1262421595" value="Very unprepared"></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </fieldset>
+              <tr><th>Apply for a job</th>
+                <td><input type="radio" name="entry.376956038" value="Very prepared"></td>
+                <td><input type="radio" name="entry.376956038" value="Prepared"></td>
+                <td><input type="radio" name="entry.376956038" value="Neutral"></td>
+                <td><input type="radio" name="entry.376956038" value="Unprepared"></td>
+                <td><input type="radio" name="entry.376956038" value="Very unprepared"></td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <!-- MCQ: last paid work in the US -->
       <section class="card" aria-labelledby="paid">
         <header id="paid">When did you last engage in paid work in the US?</header>
-        <fieldset class="content" style="display:grid;gap:8px;border:0;margin:0;padding:16px 18px">
-          <legend class="sr-only">Paid work in the US</legend>
+        <div class="content" style="display:grid;gap:8px">
           <label><input type="radio" name="entry.701405359" value="Currently working a paid job in the US"> Currently working a paid job in the US</label>
           <label><input type="radio" name="entry.701405359" value="Have never had a paid job in the US"> Have never had a paid job in the US</label>
           <label><input type="radio" name="entry.701405359" value="Within the last 6 months"> Within the last 6 months</label>
           <label><input type="radio" name="entry.701405359" value="More than 6 months ago"> More than 6 months ago</label>
-        </fieldset>
+        </div>
       </section>
 
       <!-- MCQ: total years in the US -->
       <section class="card" aria-labelledby="years">
         <header id="years">In total, how many years have you lived the US?</header>
         <div class="content small">If you were here, left, and have come back, include that time as well.</div>
-        <fieldset class="content" style="display:grid;gap:8px;border:0;margin:0;padding:16px 18px">
-          <legend class="sr-only">Total years in the US</legend>
+        <div class="content" style="display:grid;gap:8px">
           <label><input type="radio" name="entry.289512328" value="less than 6 months"> less than 6 months</label>
           <label><input type="radio" name="entry.289512328" value="6 months - 1 year"> 6 months - 1 year</label>
           <label><input type="radio" name="entry.289512328" value="2 - 5 years"> 2 - 5 years</label>
           <label><input type="radio" name="entry.289512328" value="6 - 10 years"> 6 - 10 years</label>
           <label><input type="radio" name="entry.289512328" value="more than 10 years"> more than 10 years</label>
-        </fieldset>
+        </div>
       </section>
 
       <!-- Hidden sentinel fields for ALL grid rows (prevents dropped rows when left blank) -->
@@ -633,21 +574,19 @@
       <input type="hidden" name="entry.1834223567_sentinel" value="">
 
       <!-- Preparedness (5) -->
-      <input type="hidden" name="entry.376956038_sentinel" value="">
-      <input type="hidden" name="entry.1671198128_sentinel" value="">
-      <input type="hidden" name="entry.173242196_sentinel" value="">
-      <input type="hidden" name="entry.625390586_sentinel" value="">
       <input type="hidden" name="entry.1262421595_sentinel" value="">
+      <input type="hidden" name="entry.173242196_sentinel" value="">
+      <input type="hidden" name="entry.1671198128_sentinel" value="">
+      <input type="hidden" name="entry.625390586_sentinel" value="">
+      <input type="hidden" name="entry.376956038_sentinel" value="">
 
       <!-- Bottom controls -->
-      <section class="controls" style="display:flex;gap:8px;justify-content:flex-end;padding:12px 18px;border-top:1px solid var(--header-border)">
+      <section class="controls">
         <button id="clearAll2" class="btn secondary" type="button">Clear</button>
         <button class="btn" type="submit">Submit</button>
       </section>
     </form>
   </main>
-
-  <div id="live" class="sr-only" aria-live="polite"></div>
 
   <script>
     // keep content below sticky header
@@ -662,167 +601,14 @@
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(setPad);
     })();
 
-    // Theme toggle (respects system but allows manual override)
-    (function(){
-      const btn = document.getElementById('theme');
-      if (!btn) return;
-      const KEY='nice_theme_pref';
-      const doc=document.documentElement;
-      function apply(pref){
-        if (pref==='dark'){ doc.style.colorScheme='dark'; btn.setAttribute('aria-pressed','true'); }
-        else if (pref==='light'){ doc.style.colorScheme='light'; btn.setAttribute('aria-pressed','true'); }
-        else { doc.style.colorScheme='normal'; btn.setAttribute('aria-pressed','false'); }
-      }
-      let pref = localStorage.getItem(KEY);
-      apply(pref);
-      btn.addEventListener('click', ()=>{
-        pref = pref==='dark' ? 'light' : (pref==='light' ? null : 'dark');
-        if (pref) localStorage.setItem(KEY, pref); else localStorage.removeItem(KEY);
-        apply(pref);
-      });
-    })();
-
-    // Clear all
+    // Clear all inputs
     function clearAll(){
-      const form = document.getElementById('survey');
-      form.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
-      form.querySelectorAll('input[type="text"]').forEach(el => el.value = '');
-      localStorage.removeItem('nice_pre_app_survey_v1');
+      document.querySelectorAll('#survey input[type="radio"]').forEach(el => el.checked = false);
+      document.querySelectorAll('#survey input[type="text"]').forEach(el => el.value = '');
       window.scrollTo({top:0,behavior:'smooth'});
-      announce('Form cleared');
-      updateProgress(); // refresh badges
     }
     document.getElementById('clearAll').addEventListener('click', clearAll);
     document.getElementById('clearAll2').addEventListener('click', clearAll);
-
-    // Autosave + restore
-    (function(){
-      const FORM_ID = 'survey';
-      const KEY = 'nice_pre_app_survey_v1';
-      const form = document.getElementById(FORM_ID);
-      if (!form) return;
-
-      // Restore
-      try {
-        const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
-        for (const [name, value] of Object.entries(saved)) {
-          const els = form.querySelectorAll(`[name="${CSS.escape(name)}"]`);
-          if (!els.length) continue;
-          if (els[0].type === 'radio') {
-            const el = form.querySelector(`[name="${CSS.escape(name)}"][value="${CSS.escape(value)}"]`);
-            if (el) el.checked = true;
-          } else {
-            els[0].value = value ?? '';
-          }
-        }
-      } catch(e){}
-
-      // Save on change (debounced)
-      let t;
-      form.addEventListener('input', () => {
-        clearTimeout(t);
-        t = setTimeout(() => {
-          const data = {};
-          form.querySelectorAll('input').forEach(el => {
-            if (!el.name) return;
-            if (el.type === 'radio') {
-              if (el.checked) data[el.name] = el.value;
-            } else {
-              data[el.name] = el.value;
-            }
-          });
-          localStorage.setItem(KEY, JSON.stringify(data));
-          announce('Progress saved');
-        }, 200);
-      });
-
-      // Clear storage when the hidden iframe confirms navigation
-      document.getElementById('hidden_submit').addEventListener('load', ()=>{
-        localStorage.removeItem(KEY);
-        document.getElementById('thanks').style.display='block';
-        announce('Submission complete');
-      });
-    })();
-
-    // Progress badges + submit guard
-    const sectionConfigs = [
-      { id: 'work',    containerSel: 'section#work',    label: 'work' },
-      { id: 'orgs',    containerSel: 'section#orgs',    label: 'orgs' },
-      { id: 'comfort', containerSel: 'section#comfort', label: 'comfort' },
-      { id: 'prep',    containerSel: 'section#prep',    label: 'prep' }
-    ];
-
-    function getGroupsWithin(sectionEl){
-      const radios = Array.from(sectionEl.querySelectorAll('input[type="radio"]'));
-      const names = [...new Set(radios.map(r=>r.name))];
-      return names.map(name => ({
-        name,
-        answered: !!sectionEl.querySelector(`input[name="${CSS.escape(name)}"]:checked`)
-      }));
-    }
-
-    function updateProgress(){
-      sectionConfigs.forEach(cfg=>{
-        const sectionEl = document.querySelector(cfg.containerSel);
-        if (!sectionEl) return;
-        const groups = getGroupsWithin(sectionEl);
-        const answered = groups.filter(g=>g.answered).length;
-        const total = groups.length;
-        const p = document.getElementById(`${cfg.id}-progress`);
-        const l = document.getElementById(`${cfg.id}-left`);
-        if (p) p.textContent = `${answered}/${total}`;
-        if (l) l.textContent = `${total - answered} left`;
-      });
-    }
-    document.getElementById('survey').addEventListener('input', updateProgress);
-    window.addEventListener('load', updateProgress);
-
-    // Submit guard: toast + scroll to first missing anywhere
-    (function(){
-      const form = document.getElementById('survey');
-      form.addEventListener('submit', (e)=>{
-        const radios = Array.from(form.querySelectorAll('input[type="radio"]'));
-        const groups = [...new Set(radios.map(r=>r.name))];
-        const firstMissingName = groups.find(n => !form.querySelector(`input[name="${CSS.escape(n)}"]:checked`));
-        if (firstMissingName){
-          e.preventDefault();
-          const el = form.querySelector(`input[name="${CSS.escape(firstMissingName)}"]`);
-          const row = el?.closest('tr') || el?.closest('section') || el;
-          if (row){ row.classList.add('missing'); row.scrollIntoView({behavior:'smooth', block:'center'}); }
-          showToast('Looks like some items are unanswered. Please complete them.');
-          setTimeout(()=> row && row.classList.remove('missing'), 2000);
-        }
-      });
-    })();
-
-    // Keyboard shortcuts 1–5 per matrix row
-    (function(){
-      document.querySelectorAll('.likert').forEach(table=>{
-        table.addEventListener('keydown', (e)=>{
-          if (!/^[1-5]$/.test(e.key)) return;
-          const row = e.target.closest('tr');
-          if(!row) return;
-          const idx = Number(e.key); // 1..5
-          const radios = row.querySelectorAll('input[type="radio"]');
-          const el = radios[idx-1];
-          if(el){ el.checked = true; el.dispatchEvent(new Event('input', {bubbles:true})); }
-        });
-        table.querySelectorAll('tbody th[scope="row"]').forEach(th => th.tabIndex = 0);
-      });
-    })();
-
-    // Toast + ARIA live helpers
-    function showToast(msg){
-      let t = document.querySelector('.toast');
-      if(!t){ t = document.createElement('div'); t.className='toast'; document.body.appendChild(t); }
-      t.textContent = msg;
-      clearTimeout(t._h); t._h = setTimeout(()=> t.remove(), 2500);
-      announce(msg);
-    }
-    function announce(msg){
-      const live = document.getElementById('live');
-      if (live) live.textContent = msg;
-    }
   </script>
 </body>
 </html>
