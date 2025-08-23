@@ -23,7 +23,6 @@
     .brand-sub{display:block;font-size:12px;color:var(--muted);font-weight:500}
     .btn{appearance:none;border:1px solid var(--accent);background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer}
     .btn.secondary{background:transparent;color:var(--accent)}
-    .btn.ghost{background:transparent;border-color:var(--header-border);color:var(--text)}
     .page{padding-top:calc(var(--header-height) + var(--safe-top));max-width:1100px;margin:0 auto}
     .card{margin:12px 16px;background:#fff;border:1px solid var(--header-border);border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.06);overflow:hidden}
     .card header{padding:16px 18px;border-bottom:1px solid var(--header-border);font-weight:700}
@@ -38,18 +37,6 @@
     .likert th,.likert td{padding:10px;text-align:center;border-bottom:1px solid var(--header-border)}
     .likert th:first-child{text-align:left}
     .controls{display:flex;gap:8px;justify-content:flex-end;padding:12px 18px;border-top:1px solid var(--header-border)}
-    /* Review dialog */
-    dialog.review{border:none;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);max-width:900px;width:min(92vw,900px);padding:0}
-    .review header{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--header-border);font-weight:700}
-    .review .body{max-height:65vh;overflow:auto;padding:8px 18px 18px}
-    .review .grid{display:grid;grid-template-columns:minmax(220px, 1fr) 1.2fr;gap:8px;align-items:start}
-    .review .q{font-weight:600}
-    .review .v{color:#222}
-    .review footer{display:flex;gap:10px;justify-content:flex-end;padding:14px 18px;border-top:1px solid var(--header-border)}
-    .tag{font:12px/1.6 system-ui;padding:2px 8px;border-radius:999px;border:1px solid var(--header-border);color:#444}
-    @media (max-width:700px){
-      .review .grid{grid-template-columns:1fr}
-    }
   </style>
 </head>
 <body>
@@ -58,30 +45,29 @@
     <div class="brand">
       <div class="brand-logo" aria-hidden="true"></div>
       <div>
-        <div class="brand-title" data-i18n="brandTitle">NICE Pre-Apprenticeship for Life and Work Program</div>
-        <small class="brand-sub" data-i18n="brandSub">Sticky matrix headers • Submits to Google Forms</small>
+        <div class="brand-title">NICE Pre-Apprenticeship for Life and Work Program</div>
+        <small class="brand-sub">Sticky matrix headers • Submits to Google Forms</small>
       </div>
     </div>
-    <nav style="display:flex;gap:8px;align-items:center">
-      <button id="langToggle" class="btn ghost" type="button" aria-label="Toggle language">ES</button>
-      <button id="clearAll" class="btn secondary" type="button" data-i18n="clear">Clear</button>
-      <button form="survey" class="btn" type="submit" data-i18n="submit">Submit</button>
+    <nav>
+      <button id="clearAll" class="btn secondary" type="button">Clear</button>
+      <button form="survey" class="btn" type="submit">Submit</button>
     </nav>
   </header>
 
   <main class="page">
     <!-- Intro -->
     <section class="card">
-      <header data-i18n="welcome">Welcome</header>
+      <header>Welcome</header>
       <div class="content" style="line-height:1.45">
-        <p><strong data-i18n="intro1">We're excited to have you participate in our pre-apprenticeship program.</strong></p>
-        <p data-i18n="intro2">Because it is important to us to know how helpful this program is for our clients, we are asking you to complete this survey now, <strong>BEFORE</strong> you start the program and then later, <strong>AFTER</strong> you finish the program.</p>
+        <p><strong>We're excited to have you participate in our pre-apprenticeship program.</strong></p>
+        <p>Because it is important to us to know how helpful this program is for our clients, we are asking you to complete this survey now, <strong>BEFORE</strong> you start the program and then later, <strong>AFTER</strong> you finish the program.</p>
         <div class="small">
           <ol>
-            <li data-i18n="rule1">This is not a test — there are no right or wrong answers.</li>
-            <li data-i18n="rule2">This survey is only helpful to us if your answers are honest.</li>
-            <li data-i18n="rule3">No one except a few NICE staff will see your answers.</li>
-            <li data-i18n="rule4">We are asking you to enter your first name and last initial so that we can match this survey with the one you take after the program.</li>
+            <li>This is not a test — there are no right or wrong answers.</li>
+            <li>This survey is only helpful to us if your answers are honest.</li>
+            <li>No one except a few NICE staff will see your answers.</li>
+            <li>We are asking you to enter your first name and last initial so that we can match this survey with the one you take after the program.</li>
           </ol>
         </div>
       </div>
@@ -93,14 +79,14 @@
 
       <!-- Free response -->
       <section class="card" aria-labelledby="ident">
-        <header id="ident" data-i18n="aboutYou">About you</header>
+        <header id="ident">About you</header>
         <div class="content">
           <label class="field">
-            <span><strong data-i18n="fname">Your first name</strong></span>
+            <span><strong>Your first name</strong></span>
             <input name="entry.1433485799" type="text" placeholder="FRQ1" required>
           </label>
           <label class="field">
-            <span><strong data-i18n="lnameInitial">The first letter of your last name</strong></span>
+            <span><strong>The first letter of your last name</strong></span>
             <input name="entry.1027960232" type="text" maxlength="1" placeholder="FRQ2" required>
           </label>
         </div>
@@ -108,8 +94,8 @@
 
       <!-- Workplace confidence -->
       <section class="card" aria-labelledby="work">
-        <header id="work" data-i18n="workHeader">Workplace confidence</header>
-        <div class="content small" data-i18n="workDesc1">
+        <header id="work">Workplace confidence</header>
+        <div class="content small">
           For the question below, imagine that you have just gotten a job here in the US. Also imagine that the job starts tomorrow. You really want to make a good impression.
           <br>Read each of the following and rate how confident you are in your ability to do each right now:
         </div>
@@ -117,8 +103,8 @@
           <table class="likert">
             <thead>
               <tr>
-                <th data-i18n="statement">Statement</th>
-                <th data-i18n="nca">Not confident at all</th><th data-i18n="nc">Not confident</th><th data-i18n="neu">Neutral</th><th data-i18n="conf">Confident</th><th data-i18n="vc">Very confident</th>
+                <th>Statement</th>
+                <th>Not confident at all</th><th>Not confident</th><th>Neutral</th><th>Confident</th><th>Very confident</th>
               </tr>
             </thead>
             <tbody>
@@ -275,14 +261,14 @@
 
       <!-- NYC organizations/services -->
       <section class="card" aria-labelledby="orgs">
-        <header id="orgs" data-i18n="orgsHeader">NYC organizations and services</header>
-        <div class="content small" data-i18n="orgsDesc">Think about how confident you are to navigate each of the following right now:</div>
+        <header id="orgs">NYC organizations and services</header>
+        <div class="content small">Think about how confident you are to navigate each of the following right now:</div>
         <div class="likert-wrap">
           <table class="likert">
             <thead>
               <tr>
-                <th data-i18n="orgService">Organization / service</th>
-                <th data-i18n="nca">Not confident at all</th><th data-i18n="nc">Not confident</th><th data-i18n="neu">Neutral</th><th data-i18n="conf">Confident</th><th data-i18n="vc">Very confident</th>
+                <th>Organization / service</th>
+                <th>Not confident at all</th><th>Not confident</th><th>Neutral</th><th>Confident</th><th>Very confident</th>
               </tr>
             </thead>
             <tbody>
@@ -348,14 +334,14 @@
 
       <!-- Comfort understanding -->
       <section class="card" aria-labelledby="comfort">
-        <header id="comfort" data-i18n="comfortHeader">Comfort understanding</header>
-        <div class="content small" data-i18n="comfortDesc">Look at the list below and think about how comfortable you are understanding each of them:</div>
+        <header id="comfort">Comfort understanding</header>
+        <div class="content small">Look at the list below and think about how comfortable you are understanding each of them:</div>
         <div class="likert-wrap">
           <table class="likert">
             <thead>
               <tr>
-                <th data-i18n="topic">Topic</th>
-                <th data-i18n="ncomfa">Not comfortable at all</th><th data-i18n="ncomf">Not comfortable</th><th data-i18n="neu">Neutral</th><th data-i18n="comf">Comfortable</th><th data-i18n="vcomf">Very comfortable</th>
+                <th>Topic</th>
+                <th>Not comfortable at all</th><th>Not comfortable</th><th>Neutral</th><th>Comfortable</th><th>Very comfortable</th>
               </tr>
             </thead>
             <tbody>
@@ -463,14 +449,14 @@
 
       <!-- Preparedness -->
       <section class="card" aria-labelledby="prep">
-        <header id="prep" data-i18n="prepHeader">Preparedness for job activities</header>
-        <div class="content small" data-i18n="prepDesc">Below are some activities related to finding and securing a job. Think about how prepared you feel to do each activity right now:</div>
+        <header id="prep">Preparedness for job activities</header>
+        <div class="content small">Below are some activities related to finding and securing a job. Think about how prepared you feel to do each activity right now:</div>
         <div class="likert-wrap">
           <table class="likert">
             <thead>
               <tr>
-                <th data-i18n="activity">Activity</th>
-                <th data-i18n="vu">Very unprepared</th><th data-i18n="u">Unprepared</th><th data-i18n="neu">Neutral</th><th data-i18n="p">Prepared</th><th data-i18n="vp">Very prepared</th>
+                <th>Activity</th>
+                <th>Very unprepared</th><th>Unprepared</th><th>Neutral</th><th>Prepared</th><th>Very prepared</th>
               </tr>
             </thead>
             <tbody>
@@ -515,25 +501,25 @@
 
       <!-- MCQ: last paid work in the US -->
       <section class="card" aria-labelledby="paid">
-        <header id="paid" data-i18n="paidHeader">When did you last engage in paid work in the US?</header>
+        <header id="paid">When did you last engage in paid work in the US?</header>
         <div class="content" style="display:grid;gap:8px">
-          <label><input type="radio" name="entry.701405359" value="Currently working a paid job in the US"> <span data-i18n="paid1">Currently working a paid job in the US</span></label>
-          <label><input type="radio" name="entry.701405359" value="Have never had a paid job in the US"> <span data-i18n="paid2">Have never had a paid job in the US</span></label>
-          <label><input type="radio" name="entry.701405359" value="Within the last 6 months"> <span data-i18n="paid3">Within the last 6 months</span></label>
-          <label><input type="radio" name="entry.701405359" value="More than 6 months ago"> <span data-i18n="paid4">More than 6 months ago</span></label>
+          <label><input type="radio" name="entry.701405359" value="Currently working a paid job in the US"> Currently working a paid job in the US</label>
+          <label><input type="radio" name="entry.701405359" value="Have never had a paid job in the US"> Have never had a paid job in the US</label>
+          <label><input type="radio" name="entry.701405359" value="Within the last 6 months"> Within the last 6 months</label>
+          <label><input type="radio" name="entry.701405359" value="More than 6 months ago"> More than 6 months ago</label>
         </div>
       </section>
 
       <!-- MCQ: total years in the US -->
       <section class="card" aria-labelledby="years">
-        <header id="years" data-i18n="yearsHeader">In total, how many years have you lived the US?</header>
-        <div class="content small" data-i18n="yearsDesc">If you were here, left, and have come back, include that time as well.</div>
+        <header id="years">In total, how many years have you lived the US?</header>
+        <div class="content small">If you were here, left, and have come back, include that time as well.</div>
         <div class="content" style="display:grid;gap:8px">
-          <label><input type="radio" name="entry.289512328" value="less than 6 months"> <span data-i18n="years1">less than 6 months</span></label>
-          <label><input type="radio" name="entry.289512328" value="6 months - 1 year"> <span data-i18n="years2">6 months - 1 year</span></label>
-          <label><input type="radio" name="entry.289512328" value="2 - 5 years"> <span data-i18n="years3">2 - 5 years</span></label>
-          <label><input type="radio" name="entry.289512328" value="6 - 10 years"> <span data-i18n="years4">6 - 10 years</span></label>
-          <label><input type="radio" name="entry.289512328" value="more than 10 years"> <span data-i18n="years5">more than 10 years</span></label>
+          <label><input type="radio" name="entry.289512328" value="less than 6 months"> less than 6 months</label>
+          <label><input type="radio" name="entry.289512328" value="6 months - 1 year"> 6 months - 1 year</label>
+          <label><input type="radio" name="entry.289512328" value="2 - 5 years"> 2 - 5 years</label>
+          <label><input type="radio" name="entry.289512328" value="6 - 10 years"> 6 - 10 years</label>
+          <label><input type="radio" name="entry.289512328" value="more than 10 years"> more than 10 years</label>
         </div>
       </section>
 
@@ -596,147 +582,13 @@
 
       <!-- Bottom controls -->
       <section class="controls">
-        <span class="tag" id="langTag">EN</span>
-        <button id="clearAll2" class="btn secondary" type="button" data-i18n="clear">Clear</button>
-        <button class="btn" type="submit" data-i18n="reviewBtn">Review & Submit</button>
+        <button id="clearAll2" class="btn secondary" type="button">Clear</button>
+        <button class="btn" type="submit">Submit</button>
       </section>
     </form>
   </main>
 
-  <!-- Review dialog -->
-  <dialog id="reviewDialog" class="review">
-    <header>
-      <span data-i18n="reviewTitle">Review your answers</span>
-      <button class="btn ghost" type="button" id="closeReview" aria-label="Close">✕</button>
-    </header>
-    <div class="body">
-      <div class="grid" id="reviewGrid" aria-live="polite"></div>
-    </div>
-    <footer>
-      <button class="btn secondary" type="button" id="editBtn" data-i18n="editAnswers">Edit answers</button>
-      <button class="btn" type="button" id="confirmSubmit" data-i18n="confirmSubmit">Confirm & submit</button>
-    </footer>
-  </dialog>
-
   <script>
-    // ===== Language strings =====
-    const I18N = {
-      en: {
-        brandTitle: "NICE Pre-Apprenticeship for Life and Work Program",
-        brandSub: "Sticky matrix headers • Submits to Google Forms",
-        clear: "Clear",
-        submit: "Submit",
-        welcome: "Welcome",
-        intro1: "We're excited to have you participate in our pre-apprenticeship program.",
-        intro2: "Because it is important to us to know how helpful this program is for our clients, we are asking you to complete this survey now, BEFORE you start the program and then later, AFTER you finish the program.",
-        rule1: "This is not a test — there are no right or wrong answers.",
-        rule2: "This survey is only helpful to us if your answers are honest.",
-        rule3: "No one except a few NICE staff will see your answers.",
-        rule4: "We are asking you to enter your first name and last initial so that we can match this survey with the one you take after the program.",
-        aboutYou: "About you",
-        fname: "Your first name",
-        lnameInitial: "The first letter of your last name",
-        workHeader: "Workplace confidence",
-        workDesc1: "For the question below, imagine that you have just gotten a job here in the US. Also imagine that the job starts tomorrow. You really want to make a good impression.\nRead each of the following and rate how confident you are in your ability to do each right now:",
-        statement: "Statement",
-        nca: "Not confident at all",
-        nc: "Not confident",
-        neu: "Neutral",
-        conf: "Confident",
-        vc: "Very confident",
-        orgsHeader: "NYC organizations and services",
-        orgsDesc: "Think about how confident you are to navigate each of the following right now:",
-        orgService: "Organization / service",
-        comfortHeader: "Comfort understanding",
-        comfortDesc: "Look at the list below and think about how comfortable you are understanding each of them:",
-        topic: "Topic",
-        ncomfa: "Not comfortable at all",
-        ncomf: "Not comfortable",
-        comf: "Comfortable",
-        vcomf: "Very comfortable",
-        prepHeader: "Preparedness for job activities",
-        prepDesc: "Below are some activities related to finding and securing a job. Think about how prepared you feel to do each activity right now:",
-        activity: "Activity",
-        vu: "Very unprepared",
-        u: "Unprepared",
-        p: "Prepared",
-        vp: "Very prepared",
-        paidHeader: "When did you last engage in paid work in the US?",
-        paid1: "Currently working a paid job in the US",
-        paid2: "Have never had a paid job in the US",
-        paid3: "Within the last 6 months",
-        paid4: "More than 6 months ago",
-        yearsHeader: "In total, how many years have you lived the US?",
-        yearsDesc: "If you were here, left, and have come back, include that time as well.",
-        years1: "less than 6 months",
-        years2: "6 months - 1 year",
-        years3: "2 - 5 years",
-        years4: "6 - 10 years",
-        years5: "more than 10 years",
-        reviewBtn: "Review & Submit",
-        reviewTitle: "Review your answers",
-        editAnswers: "Edit answers",
-        confirmSubmit: "Confirm & submit"
-      },
-      es: {
-        brandTitle: "Programa NICE de Pre-Aprendizaje para la Vida y el Trabajo",
-        brandSub: "Encabezados de matriz fijos • Envía a Google Forms",
-        clear: "Borrar",
-        submit: "Enviar",
-        welcome: "Bienvenido/a",
-        intro1: "Nos alegra que participes en nuestro programa de pre-aprendizaje.",
-        intro2: "Como es importante para nosotros saber cuán útil es este programa para nuestros clientes, te pedimos completar esta encuesta ahora, ANTES de iniciar el programa y luego, DESPUÉS de finalizarlo.",
-        rule1: "Esto no es un examen: no hay respuestas correctas o incorrectas.",
-        rule2: "Esta encuesta solo es útil si tus respuestas son honestas.",
-        rule3: "Nadie excepto algunos miembros del personal de NICE verá tus respuestas.",
-        rule4: "Te pedimos tu nombre y la inicial de tu apellido para poder relacionar esta encuesta con la que harás después del programa.",
-        aboutYou: "Sobre ti",
-        fname: "Tu nombre",
-        lnameInitial: "La primera letra de tu apellido",
-        workHeader: "Confianza en el lugar de trabajo",
-        workDesc1: "Para la pregunta de abajo, imagina que acabas de conseguir un trabajo en EE. UU. y que comienzas mañana. Quieres causar una buena impresión.\nLee cada afirmación y califica cuánta confianza tienes para hacer cada cosa ahora mismo:",
-        statement: "Afirmación",
-        nca: "Nada confiado/a",
-        nc: "Poco confiado/a",
-        neu: "Neutral",
-        conf: "Confiado/a",
-        vc: "Muy confiado/a",
-        orgsHeader: "Organizaciones y servicios de NYC",
-        orgsDesc: "Piensa qué tan confiado/a te sientes para desenvolverte en cada uno de los siguientes:",
-        orgService: "Organización / servicio",
-        comfortHeader: "Comodidad al comprender",
-        comfortDesc: "Mira la lista y piensa qué tan cómodo/a te sientes al comprender cada tema:",
-        topic: "Tema",
-        ncomfa: "Nada cómodo/a",
-        ncomf: "Poco cómodo/a",
-        comf: "Cómodo/a",
-        vcomf: "Muy cómodo/a",
-        prepHeader: "Preparación para actividades laborales",
-        prepDesc: "A continuación hay actividades relacionadas con buscar y conseguir trabajo. Piensa qué tan preparado/a te sientes para cada actividad ahora:",
-        activity: "Actividad",
-        vu: "Nada preparado/a",
-        u: "Poco preparado/a",
-        p: "Preparado/a",
-        vp: "Muy preparado/a",
-        paidHeader: "¿Cuándo fue la última vez que trabajaste con pago en EE. UU.?",
-        paid1: "Actualmente trabajo en un empleo pagado en EE. UU.",
-        paid2: "Nunca he tenido un empleo pagado en EE. UU.",
-        paid3: "En los últimos 6 meses",
-        paid4: "Hace más de 6 meses",
-        yearsHeader: "En total, ¿cuántos años has vivido en EE. UU.?",
-        yearsDesc: "Si estuviste, te fuiste y volviste, incluye todo ese tiempo.",
-        years1: "menos de 6 meses",
-        years2: "6 meses - 1 año",
-        years3: "2 - 5 años",
-        years4: "6 - 10 años",
-        years5: "más de 10 años",
-        reviewBtn: "Revisar y Enviar",
-        reviewTitle: "Revisa tus respuestas",
-        editAnswers: "Editar respuestas",
-        confirmSubmit: "Confirmar y enviar"
-      }
-    };
-
     // keep content below sticky header
     (function(){
       const header = document.getElementById('siteHeader');
@@ -749,74 +601,7 @@
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(setPad);
     })();
 
-    // ===== Language toggle =====
-    let currentLang = 'en';
-    const langBtn = document.getElementById('langToggle');
-    const langTag = document.getElementById('langTag');
-
-    function applyI18N(lang){
-      const dict = I18N[lang];
-      document.querySelectorAll('[data-i18n]').forEach(el=>{
-        const key = el.getAttribute('data-i18n');
-        if (dict[key] !== undefined){
-          // Preserve <strong> tags in intro2
-          if (key === 'intro2'){
-            el.innerHTML = dict[key].replace(/\*\*?BEFORE\*\*?/g,'<strong>BEFORE</strong>').replace(/\*\*?AFTER\*\*?/g,'<strong>AFTER</strong>');
-          } else {
-            el.textContent = dict[key];
-          }
-        }
-      });
-      // Update option values (so review shows translated text)
-      const valueMap = {
-        en: {
-          "Nada confiado/a":"Not confident at all",
-          "Poco confiado/a":"Not confident",
-          "Neutral":"Neutral",
-          "Confiado/a":"Confident",
-          "Muy confiado/a":"Very confident",
-          "Nada cómodo/a":"Not comfortable at all",
-          "Poco cómodo/a":"Not comfortable",
-          "Cómodo/a":"Comfortable",
-          "Muy cómodo/a":"Very comfortable",
-          "Nada preparado/a":"Very unprepared",
-          "Poco preparado/a":"Unprepared",
-          "Preparado/a":"Prepared",
-          "Muy preparado/a":"Very prepared"
-        },
-        es: {
-          "Not confident at all":"Nada confiado/a",
-          "Not confident":"Poco confiado/a",
-          "Neutral":"Neutral",
-          "Confident":"Confiado/a",
-          "Very confident":"Muy confiado/a",
-          "Not comfortable at all":"Nada cómodo/a",
-          "Not comfortable":"Poco cómodo/a",
-          "Comfortable":"Cómodo/a",
-          "Very comfortable":"Muy cómodo/a",
-          "Very unprepared":"Nada preparado/a",
-          "Unprepared":"Poco preparado/a",
-          "Prepared":"Preparado/a",
-          "Very prepared":"Muy preparado/a"
-        }
-      }[lang];
-
-      document.querySelectorAll('input[type="radio"]').forEach(input=>{
-        if (valueMap[input.value]) input.value = valueMap[input.value];
-      });
-
-      // Buttons and tag labels
-      langBtn.textContent = (lang === 'en') ? 'ES' : 'EN';
-      langTag.textContent = lang.toUpperCase();
-      document.documentElement.lang = lang;
-    }
-
-    langBtn.addEventListener('click', ()=>{
-      currentLang = (currentLang === 'en') ? 'es' : 'en';
-      applyI18N(currentLang);
-    });
-
-    // ===== Clear all =====
+    // Clear all
     function clearAll(){
       document.querySelectorAll('#survey input[type="radio"]').forEach(el => el.checked = false);
       document.querySelectorAll('#survey input[type="text"]').forEach(el => el.value = '');
@@ -824,97 +609,6 @@
     }
     document.getElementById('clearAll').addEventListener('click', clearAll);
     document.getElementById('clearAll2').addEventListener('click', clearAll);
-
-    // ===== Review & Confirm submission =====
-    const form = document.getElementById('survey');
-    const reviewDialog = document.getElementById('reviewDialog');
-    const reviewGrid = document.getElementById('reviewGrid');
-    const closeReview = document.getElementById('closeReview');
-    const editBtn = document.getElementById('editBtn');
-    const confirmBtn = document.getElementById('confirmSubmit');
-    let confirmed = false;
-
-    function labelFromInput(input){
-      // If inside a table row with a TH, use that
-      const tr = input.closest('tr');
-      if (tr){
-        const th = tr.querySelector('th');
-        if (th) return th.textContent.trim();
-      }
-      // Otherwise, likely an inline label choice (MCQs)
-      const label = input.closest('label');
-      if (label){
-        // Clone and strip input to get text
-        const clone = label.cloneNode(true);
-        const inp = clone.querySelector('input');
-        if (inp) inp.remove();
-        return clone.textContent.trim().replace(/\s+/g,' ');
-      }
-      // Fallback: name attribute
-      return input.name;
-    }
-
-    function groupQuestions(){
-      const items = [];
-
-      // Text fields
-      document.querySelectorAll('#survey input[type="text"]').forEach(inp=>{
-        const lbl = inp.closest('.field')?.querySelector('span,strong')?.textContent?.trim() || inp.name;
-        items.push({label: lbl, value: inp.value || '—'});
-      });
-
-      // Radio groups (unique by name)
-      const names = new Set();
-      document.querySelectorAll('#survey input[type="radio"]').forEach(r=>names.add(r.name));
-      names.forEach(name=>{
-        const any = document.querySelector(`input[type="radio"][name="${CSS.escape(name)}"]`);
-        if (!any) return;
-        const label = labelFromInput(any);
-        const checked = document.querySelector(`input[type="radio"][name="${CSS.escape(name)}"]:checked`);
-        const value = checked ? checked.value : '—';
-        items.push({label, value});
-      });
-
-      return items;
-    }
-
-    function renderReview(){
-      reviewGrid.innerHTML = '';
-      const items = groupQuestions();
-      for (const {label, value} of items){
-        const q = document.createElement('div');
-        q.className = 'q';
-        q.textContent = label;
-        const v = document.createElement('div');
-        v.className = 'v';
-        v.textContent = value;
-        reviewGrid.appendChild(q);
-        reviewGrid.appendChild(v);
-      }
-    }
-
-    form.addEventListener('submit', (e)=>{
-      if (confirmed) return; // let it pass through
-      e.preventDefault();
-      renderReview();
-      if (typeof reviewDialog.showModal === 'function') {
-        reviewDialog.showModal();
-      } else {
-        // Fallback: anchor to top and show as block
-        reviewDialog.style.display = 'block';
-      }
-    });
-
-    closeReview.addEventListener('click', ()=>reviewDialog.close());
-    editBtn.addEventListener('click', ()=>reviewDialog.close());
-    confirmBtn.addEventListener('click', ()=>{
-      confirmed = true;
-      reviewDialog.close();
-      form.submit();
-    });
-
-    // Initialize i18n to EN on load
-    applyI18N(currentLang);
   </script>
 </body>
 </html>
