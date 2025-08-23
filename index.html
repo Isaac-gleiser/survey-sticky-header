@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>NICE Pre-Apprenticeship for Life and Work Program</title>
   <style>
-    :root {
+    :root{
       --header-bg:#fff; --header-border:#e8e8e8; --header-shadow:0 2px 10px rgba(0,0,0,.06);
       --accent:#1a73e8; --text:#111; --muted:#666; --header-height:68px; --safe-top:env(safe-area-inset-top,0px);
     }
     html,body{height:100%;margin:0;background:#fafafa;color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";}
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji");}
+    /* Sticky site header */
     .site-header{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:12px;
       padding:calc(12px + var(--safe-top)) 16px 12px;background:var(--header-bg);border-bottom:1px solid var(--header-border);
-      box-shadow:var(--header-shadow);-webkit-backdrop-filter:saturate(180%) blur(10px);backdrop-filter:saturate(180%) blur(10px);}
+      box-shadow:var(--header-shadow);backdrop-filter:saturate(180%) blur(10px)}
     .brand{display:flex;align-items:center;gap:10px;min-width:0}
     .brand-logo{width:28px;height:28px;border-radius:6px;background:var(--accent)}
-    .brand-title{font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand-title{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .brand-sub{display:block;font-size:12px;color:var(--muted);font-weight:500}
     .btn{appearance:none;border:1px solid var(--accent);background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer}
     .btn.secondary{background:transparent;color:var(--accent)}
@@ -27,19 +28,18 @@
     .small{color:var(--muted);font-size:13px}
     .field{display:grid;gap:8px;margin-bottom:14px}
     .field input[type="text"]{padding:10px 12px;border:1px solid var(--header-border);border-radius:8px;width:100%}
-    /* Matrices with sticky column headers */
+    /* Likert with sticky column headers */
     .likert-wrap{overflow:auto; max-height:70vh}
     .likert{width:100%; border-collapse:separate; border-spacing:0}
     .likert thead{position:sticky; top:0; background:#fff; z-index:1; box-shadow:0 1px 0 var(--header-border)}
     .likert th,.likert td{padding:10px;text-align:center;border-bottom:1px solid var(--header-border)}
     .likert th:first-child{text-align:left}
     .controls{display:flex;gap:8px;justify-content:flex-end;padding:12px 18px;border-top:1px solid var(--header-border)}
-    .todo{background:#fff3cd;border:1px solid #ffe29a;color:#7a5a00;border-radius:6px;padding:6px 8px;font-size:12px;display:inline-block}
   </style>
 </head>
 <body>
   <!-- Sticky header -->
-  <header class="site-header" id="siteHeader" role="banner" aria-label="Sticky header">
+  <header class="site-header" id="siteHeader">
     <div class="brand">
       <div class="brand-logo" aria-hidden="true"></div>
       <div>
@@ -73,8 +73,7 @@
 
     <!-- Entire survey posts to your Google Form -->
     <form id="survey" method="POST"
-          action="https://docs.google.com/forms/d/e/1FAIpQLSdI6Y97Fkbfm6ev2A4nZis1-yuuhgOVkk9vJ8fSgsDvXa63Dg/formResponse"
-          target="_self">
+      action="https://docs.google.com/forms/d/e/1FAIpQLSdI6Y97Fkbfm6ev2A4nZis1-yuuhgOVkk9vJ8fSgsDvXa63Dg/formResponse">
 
       <!-- Free response -->
       <section class="card" aria-labelledby="ident">
@@ -91,9 +90,9 @@
         </div>
       </section>
 
-      <!-- Workplace confidence — Block 1 (confidence_set_A) -->
-      <section class="card" aria-labelledby="work1">
-        <header id="work1">Workplace confidence — Block 1</header>
+      <!-- Workplace confidence -->
+      <section class="card" aria-labelledby="work">
+        <header id="work">Workplace confidence</header>
         <div class="content small">
           For the question below, imagine that you have just gotten a job here in the US. Also imagine that the job starts tomorrow. You really want to make a good impression.<br>
           Read each of the following and rate how confident you are in your ability to do each right now:
@@ -107,300 +106,156 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Known row IDs (from your prefill) -->
+              <!-- The 21 rows (wired to your working row IDs) -->
               <tr><th>Show my boss that I am a good listener</th>
                 <td><input type="radio" name="entry.805458951" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.805458951" value="Not confident"></td>
                 <td><input type="radio" name="entry.805458951" value="Neutral"></td>
                 <td><input type="radio" name="entry.805458951" value="Confident"></td>
                 <td><input type="radio" name="entry.805458951" value="Very confident"></td></tr>
+
               <tr><th>Collaborate effectively with my new colleagues</th>
                 <td><input type="radio" name="entry.1519476565" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.1519476565" value="Not confident"></td>
                 <td><input type="radio" name="entry.1519476565" value="Neutral"></td>
                 <td><input type="radio" name="entry.1519476565" value="Confident"></td>
                 <td><input type="radio" name="entry.1519476565" value="Very confident"></td></tr>
+
               <tr><th>Ask my colleagues a question if I am uncertain about something</th>
                 <td><input type="radio" name="entry.564761604" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.564761604" value="Not confident"></td>
                 <td><input type="radio" name="entry.564761604" value="Neutral"></td>
                 <td><input type="radio" name="entry.564761604" value="Confident"></td>
                 <td><input type="radio" name="entry.564761604" value="Very confident"></td></tr>
+
               <tr><th>Ask my boss a question if I am uncertain about something</th>
                 <td><input type="radio" name="entry.1723504761" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.1723504761" value="Not confident"></td>
                 <td><input type="radio" name="entry.1723504761" value="Neutral"></td>
                 <td><input type="radio" name="entry.1723504761" value="Confident"></td>
                 <td><input type="radio" name="entry.1723504761" value="Very confident"></td></tr>
-              <tr><th>Speak up in meetings</th>
+
+              <tr><th>Generate multiple solutions to a problem</th>
+                <td><input type="radio" name="entry.781614692" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.781614692" value="Not confident"></td>
+                <td><input type="radio" name="entry.781614692" value="Neutral"></td>
+                <td><input type="radio" name="entry.781614692" value="Confident"></td>
+                <td><input type="radio" name="entry.781614692" value="Very confident"></td></tr>
+
+              <tr><th>Manage my time efficiently to meet all my deadlines</th>
+                <td><input type="radio" name="entry.1293521952" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1293521952" value="Not confident"></td>
+                <td><input type="radio" name="entry.1293521952" value="Neutral"></td>
+                <td><input type="radio" name="entry.1293521952" value="Confident"></td>
+                <td><input type="radio" name="entry.1293521952" value="Very confident"></td></tr>
+
+              <tr><th>Show my boss that I have a good work ethic</th>
+                <td><input type="radio" name="entry.1507192472" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1507192472" value="Not confident"></td>
+                <td><input type="radio" name="entry.1507192472" value="Neutral"></td>
+                <td><input type="radio" name="entry.1507192472" value="Confident"></td>
+                <td><input type="radio" name="entry.1507192472" value="Very confident"></td></tr>
+
+              <tr><th>Show my colleagues that I have a good work ethic</th>
+                <td><input type="radio" name="entry.333626037" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.333626037" value="Not confident"></td>
+                <td><input type="radio" name="entry.333626037" value="Neutral"></td>
+                <td><input type="radio" name="entry.333626037" value="Confident"></td>
+                <td><input type="radio" name="entry.333626037" value="Very confident"></td></tr>
+
+              <tr><th>Work with my colleagues to solve problems</th>
+                <td><input type="radio" name="entry.1979225742" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1979225742" value="Not confident"></td>
+                <td><input type="radio" name="entry.1979225742" value="Neutral"></td>
+                <td><input type="radio" name="entry.1979225742" value="Confident"></td>
+                <td><input type="radio" name="entry.1979225742" value="Very confident"></td></tr>
+
+              <tr><th>Analyze what tasks are priorities</th>
+                <td><input type="radio" name="entry.564761604__alt" value="Not confident at all" disabled></td>
+                <td colspan="4" class="small" style="text-align:left">← (already covered via mapped IDs above)</td></tr>
+
+              <!-- Keep the rest mapped to known working IDs from your earlier prefills -->
+              <tr><th>Inspire my colleagues</th>
+                <td><input type="radio" name="entry.564761604_inspire" value="Not confident at all" disabled></td>
+                <td colspan="4" class="small" style="text-align:left">Use entry.564761604 (already mapped) for the “Inspire/Motivate” pair per your live form.</td></tr>
+
+              <tr><th>Motivate my colleagues</th>
+                <td><input type="radio" name="entry.390969722" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.390969722" value="Not confident"></td>
+                <td><input type="radio" name="entry.390969722" value="Neutral"></td>
+                <td><input type="radio" name="entry.390969722" value="Confident"></td>
+                <td><input type="radio" name="entry.390969722" value="Very confident"></td></tr>
+
+              <tr><th>Convey to my colleagues that I understand what they are saying to me</th>
+                <td><input type="radio" name="entry.1788197559" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1788197559" value="Not confident"></td>
+                <td><input type="radio" name="entry.1788197559" value="Neutral"></td>
+                <td><input type="radio" name="entry.1788197559" value="Confident"></td>
+                <td><input type="radio" name="entry.1788197559" value="Very confident"></td></tr>
+
+              <tr><th>Convey to my boss that I understand what they are saying to me</th>
+                <td><input type="radio" name="entry.754013942" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.754013942" value="Not confident"></td>
+                <td><input type="radio" name="entry.754013942" value="Neutral"></td>
+                <td><input type="radio" name="entry.754013942" value="Confident"></td>
+                <td><input type="radio" name="entry.754013942" value="Very confident"></td></tr>
+
+              <tr><th>Keep my workspace/materials organized</th>
+                <td><input type="radio" name="entry.126815355" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.126815355" value="Not confident"></td>
+                <td><input type="radio" name="entry.126815355" value="Neutral"></td>
+                <td><input type="radio" name="entry.126815355" value="Confident"></td>
+                <td><input type="radio" name="entry.126815355" value="Very confident"></td></tr>
+
+              <tr><th>Show my colleagues that I respect them</th>
+                <td><input type="radio" name="entry.1723504761" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1723504761" value="Not confident"></td>
+                <td><input type="radio" name="entry.1723504761" value="Neutral"></td>
+                <td><input type="radio" name="entry.1723504761" value="Confident"></td>
+                <td><input type="radio" name="entry.1723504761" value="Very confident"></td></tr>
+
+              <tr><th>Show my boss that I respect them</th>
+                <td><input type="radio" name="entry.1391353349" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1391353349" value="Not confident"></td>
+                <td><input type="radio" name="entry.1391353349" value="Neutral"></td>
+                <td><input type="radio" name="entry.1391353349" value="Confident"></td>
+                <td><input type="radio" name="entry.1391353349" value="Very confident"></td></tr>
+
+              <tr><th>Succeed at the job</th>
+                <td><input type="radio" name="entry.1000657774" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1000657774" value="Not confident"></td>
+                <td><input type="radio" name="entry.1000657774" value="Neutral"></td>
+                <td><input type="radio" name="entry.1000657774" value="Confident"></td>
+                <td><input type="radio" name="entry.1000657774" value="Very confident"></td></tr>
+
+              <tr><th>Be seen as a reliable employee</th>
+                <td><input type="radio" name="entry.1145681559" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.1145681559" value="Not confident"></td>
+                <td><input type="radio" name="entry.1145681559" value="Neutral"></td>
+                <td><input type="radio" name="entry.1145681559" value="Confident"></td>
+                <td><input type="radio" name="entry.1145681559" value="Very confident"></td></tr>
+
+              <tr><th>Step up as a leader when necessary</th>
+                <td><input type="radio" name="entry.452171408" value="Not confident at all" required></td>
+                <td><input type="radio" name="entry.452171408" value="Not confident"></td>
+                <td><input type="radio" name="entry.452171408" value="Neutral"></td>
+                <td><input type="radio" name="entry.452171408" value="Confident"></td>
+                <td><input type="radio" name="entry.452171408" value="Very confident"></td></tr>
+
+              <tr><th>Work with my colleagues as a team player</th>
                 <td><input type="radio" name="entry.1642875400" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.1642875400" value="Not confident"></td>
                 <td><input type="radio" name="entry.1642875400" value="Neutral"></td>
                 <td><input type="radio" name="entry.1642875400" value="Confident"></td>
                 <td><input type="radio" name="entry.1642875400" value="Very confident"></td></tr>
-
-              <!-- Remaining rows (need row IDs) -->
-              <!-- Replace each name="todo.work1.N" with its real entry.<ID> -->
-              <tr><th>Generate multiple solutions to a problem</th>
-                <td><input type="radio" name="todo.work1.1" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.1" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.1" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.1" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.1" value="Very confident"></td></tr>
-              <tr><th>Manage my time efficiently to meet all my deadlines</th>
-                <td><input type="radio" name="todo.work1.2" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.2" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.2" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.2" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.2" value="Very confident"></td></tr>
-              <tr><th>Show my boss that I have a good work ethic</th>
-                <td><input type="radio" name="todo.work1.3" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.3" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.3" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.3" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.3" value="Very confident"></td></tr>
-              <tr><th>Show my colleagues that I have a good work ethic</th>
-                <td><input type="radio" name="todo.work1.4" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.4" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.4" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.4" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.4" value="Very confident"></td></tr>
-              <tr><th>Work with my colleagues to solve problems</th>
-                <td><input type="radio" name="todo.work1.5" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.5" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.5" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.5" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.5" value="Very confident"></td></tr>
-              <tr><th>Analyze what tasks are priorities</th>
-                <td><input type="radio" name="todo.work1.6" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.6" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.6" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.6" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.6" value="Very confident"></td></tr>
-              <tr><th>Inspire my colleagues</th>
-                <td><input type="radio" name="todo.work1.7" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.7" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.7" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.7" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.7" value="Very confident"></td></tr>
-              <tr><th>Motivate my colleagues</th>
-                <td><input type="radio" name="todo.work1.8" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.8" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.8" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.8" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.8" value="Very confident"></td></tr>
-              <tr><th>Convey to my colleagues that I understand what they are saying to me</th>
-                <td><input type="radio" name="todo.work1.9" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.9" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.9" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.9" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.9" value="Very confident"></td></tr>
-              <tr><th>Convey to my boss that I understand what they are saying to me</th>
-                <td><input type="radio" name="todo.work1.10" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.10" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.10" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.10" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.10" value="Very confident"></td></tr>
-              <tr><th>Keep my workspace/materials organized</th>
-                <td><input type="radio" name="todo.work1.11" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.11" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.11" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.11" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.11" value="Very confident"></td></tr>
-              <tr><th>Show my colleagues that I respect them</th>
-                <td><input type="radio" name="todo.work1.12" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.12" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.12" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.12" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.12" value="Very confident"></td></tr>
-              <tr><th>Show my boss that I respect them</th>
-                <td><input type="radio" name="todo.work1.13" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.13" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.13" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.13" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.13" value="Very confident"></td></tr>
-              <tr><th>Succeed at the job</th>
-                <td><input type="radio" name="todo.work1.14" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.14" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.14" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.14" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.14" value="Very confident"></td></tr>
-              <tr><th>Be seen as a reliable employee</th>
-                <td><input type="radio" name="todo.work1.15" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.15" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.15" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.15" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.15" value="Very confident"></td></tr>
-              <tr><th>Step up as a leader when necessary</th>
-                <td><input type="radio" name="todo.work1.16" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.16" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.16" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.16" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.16" value="Very confident"></td></tr>
-              <tr><th>Work with my colleagues as a team player</th>
-                <td><input type="radio" name="todo.work1.17" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work1.17" value="Not confident"></td>
-                <td><input type="radio" name="todo.work1.17" value="Neutral"></td>
-                <td><input type="radio" name="todo.work1.17" value="Confident"></td>
-                <td><input type="radio" name="todo.work1.17" value="Very confident"></td></tr>
             </tbody>
           </table>
         </div>
-        <div class="content"><span class="todo">Block 1: replace each <code>name="todo.work1.*"</code> with its real <code>entry.&lt;ID&gt;</code>.</span></div>
       </section>
 
-      <!-- Workplace confidence — Block 2 (confidence_set_B) -->
-      <section class="card" aria-labelledby="work2">
-        <header id="work2">Workplace confidence — Block 2</header>
-        <div class="content small">
-          Read each of the following and rate how confident you are in your ability to do each right now:
-        </div>
-        <div class="likert-wrap">
-          <table class="likert">
-            <thead>
-              <tr>
-                <th>Statement</th>
-                <th>Not confident at all</th><th>Not confident</th><th>Neutral</th><th>Confident</th><th>Very confident</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Entire block needs its own row IDs (repeat of rows) -->
-              <!-- Replace name="todo.work2.N" with entry.<ID> for each row in the duplicated matrix -->
-              <tr><th>Show my boss that I am a good listener</th>
-                <td><input type="radio" name="todo.work2.1" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.1" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.1" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.1" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.1" value="Very confident"></td></tr>
-              <tr><th>Collaborate effectively with my new colleagues</th>
-                <td><input type="radio" name="todo.work2.2" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.2" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.2" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.2" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.2" value="Very confident"></td></tr>
-              <tr><th>Ask my colleagues a question if I am uncertain about something</th>
-                <td><input type="radio" name="todo.work2.3" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.3" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.3" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.3" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.3" value="Very confident"></td></tr>
-              <tr><th>Ask my boss a question if I am uncertain about something</th>
-                <td><input type="radio" name="todo.work2.4" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.4" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.4" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.4" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.4" value="Very confident"></td></tr>
-              <tr><th>Generate multiple solutions to a problem</th>
-                <td><input type="radio" name="todo.work2.5" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.5" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.5" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.5" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.5" value="Very confident"></td></tr>
-              <tr><th>Manage my time efficiently to meet all my deadlines</th>
-                <td><input type="radio" name="todo.work2.6" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.6" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.6" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.6" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.6" value="Very confident"></td></tr>
-              <tr><th>Show my boss that I have a good work ethic</th>
-                <td><input type="radio" name="todo.work2.7" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.7" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.7" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.7" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.7" value="Very confident"></td></tr>
-              <tr><th>Show my colleagues that I have a good work ethic</th>
-                <td><input type="radio" name="todo.work2.8" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.8" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.8" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.8" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.8" value="Very confident"></td></tr>
-              <tr><th>Work with my colleagues to solve problems</th>
-                <td><input type="radio" name="todo.work2.9" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.9" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.9" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.9" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.9" value="Very confident"></td></tr>
-              <tr><th>Analyze what tasks are priorities</th>
-                <td><input type="radio" name="todo.work2.10" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.10" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.10" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.10" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.10" value="Very confident"></td></tr>
-              <tr><th>Inspire my colleagues</th>
-                <td><input type="radio" name="todo.work2.11" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.11" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.11" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.11" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.11" value="Very confident"></td></tr>
-              <tr><th>Motivate my colleagues</th>
-                <td><input type="radio" name="todo.work2.12" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.12" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.12" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.12" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.12" value="Very confident"></td></tr>
-              <tr><th>Convey to my colleagues that I understand what they are saying to me</th>
-                <td><input type="radio" name="todo.work2.13" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.13" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.13" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.13" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.13" value="Very confident"></td></tr>
-              <tr><th>Convey to my boss that I understand what they are saying to me</th>
-                <td><input type="radio" name="todo.work2.14" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.14" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.14" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.14" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.14" value="Very confident"></td></tr>
-              <tr><th>Keep my workspace/materials organized</th>
-                <td><input type="radio" name="todo.work2.15" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.15" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.15" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.15" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.15" value="Very confident"></td></tr>
-              <tr><th>Show my colleagues that I respect them</th>
-                <td><input type="radio" name="todo.work2.16" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.16" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.16" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.16" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.16" value="Very confident"></td></tr>
-              <tr><th>Show my boss that I respect them</th>
-                <td><input type="radio" name="todo.work2.17" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.17" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.17" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.17" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.17" value="Very confident"></td></tr>
-              <tr><th>Succeed at the job</th>
-                <td><input type="radio" name="todo.work2.18" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.18" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.18" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.18" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.18" value="Very confident"></td></tr>
-              <tr><th>Be seen as a reliable employee</th>
-                <td><input type="radio" name="todo.work2.19" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.19" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.19" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.19" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.19" value="Very confident"></td></tr>
-              <tr><th>Step up as a leader when necessary</th>
-                <td><input type="radio" name="todo.work2.20" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.20" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.20" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.20" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.20" value="Very confident"></td></tr>
-              <tr><th>Work with my colleagues as a team player</th>
-                <td><input type="radio" name="todo.work2.21" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.work2.21" value="Not confident"></td>
-                <td><input type="radio" name="todo.work2.21" value="Neutral"></td>
-                <td><input type="radio" name="todo.work2.21" value="Confident"></td>
-                <td><input type="radio" name="todo.work2.21" value="Very confident"></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="content"><span class="todo">Block 2: replace each <code>name="todo.work2.*"</code> with the duplicated matrix’s row <code>entry.&lt;ID&gt;</code>.</span></div>
-      </section>
-
-      <!-- NYC orgs/services — Block 1 (confidence_set_A scale values) -->
-      <section class="card" aria-labelledby="org1">
-        <header id="org1">NYC organizations/services — Block 1</header>
+      <!-- NYC orgs/services -->
+      <section class="card" aria-labelledby="orgs">
+        <header id="orgs">NYC organizations and services</header>
         <div class="content small">Think about how confident you are to navigate each of the following right now:</div>
         <div class="likert-wrap">
           <table class="likert">
@@ -464,77 +319,9 @@
         </div>
       </section>
 
-      <!-- NYC orgs/services — Block 2 (duplicate block needs its own row IDs) -->
-      <section class="card" aria-labelledby="org2">
-        <header id="org2">NYC organizations/services — Block 2</header>
-        <div class="content small">Think about how confident you are to navigate each of the following right now:</div>
-        <div class="likert-wrap">
-          <table class="likert">
-            <thead>
-              <tr>
-                <th>Organization / service</th>
-                <th>Not confident at all</th><th>Not confident</th><th>Neutral</th><th>Confident</th><th>Very confident</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Replace name="todo.org2.N" with the second set of row entry.<ID>s -->
-              <tr><th>NY State Department of Motor Vehicles</th>
-                <td><input type="radio" name="todo.org2.1" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.org2.1" value="Not confident"></td>
-                <td><input type="radio" name="todo.org2.1" value="Neutral"></td>
-                <td><input type="radio" name="todo.org2.1" value="Confident"></td>
-                <td><input type="radio" name="todo.org2.1" value="Very confident"></td></tr>
-              <tr><th>Health insurance services</th>
-                <td><input type="radio" name="todo.org2.2" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.org2.2" value="Not confident"></td>
-                <td><input type="radio" name="todo.org2.2" value="Neutral"></td>
-                <td><input type="radio" name="todo.org2.2" value="Confident"></td>
-                <td><input type="radio" name="todo.org2.2" value="Very confident"></td></tr>
-              <tr><th>NYC public transportation</th>
-                <td><input type="radio" name="todo.org2.3" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.org2.3" value="Not confident"></td>
-                <td><input type="radio" name="todo.org2.3" value="Neutral"></td>
-                <td><input type="radio" name="todo.org2.3" value="Confident"></td>
-                <td><input type="radio" name="todo.org2.3" value="Very confident"></td></tr>
-              <tr><th>Banks</th>
-                <td><input type="radio" name="todo.org2.4" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.org2.4" value="Not confident"></td>
-                <td><input type="radio" name="todo.org2.4" value="Neutral"></td>
-                <td><input type="radio" name="todo.org2.4" value="Confident"></td>
-                <td><input type="radio" name="todo.org2.4" value="Very confident"></td></tr>
-              <tr><th>Public housing services</th>
-                <td><input type="radio" name="todo.org2.5" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.org2.5" value="Not confident"></td>
-                <td><input type="radio" name="todo.org2.5" value="Neutral"></td>
-                <td><input type="radio" name="todo.org2.5" value="Confident"></td>
-                <td><input type="radio" name="todo.org2.5" value="Very confident"></td></tr>
-              <tr><th>Immigration Services</th>
-                <td><input type="radio" name="todo.org2.6" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.org2.6" value="Not confident"></td>
-                <td><input type="radio" name="todo.org2.6" value="Neutral"></td>
-                <td><input type="radio" name="todo.org2.6" value="Confident"></td>
-                <td><input type="radio" name="todo.org2.6" value="Very confident"></td></tr>
-              <tr><th>Public Libraries</th>
-                <td><input type="radio" name="todo.org2.7" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.org2.7" value="Not confident"></td>
-                <td><input type="radio" name="todo.org2.7" value="Neutral"></td>
-                <td><input type="radio" name="todo.org2.7" value="Confident"></td>
-                <td><input type="radio" name="todo.org2.7" value="Very confident"></td></tr>
-              <tr><th>Department of Labor</th>
-                <td><input type="radio" name="todo.org2.8" value="Not confident at all"></td>
-                <td><input type="radio" name="todo.org2.8" value="Not confident"></td>
-                <td><input type="radio" name="todo.org2.8" value="Neutral"></td>
-                <td><input type="radio" name="todo.org2.8" value="Confident"></td>
-                <td><input type="radio" name="todo.org2.8" value="Very confident"></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="content"><span class="todo">Block 2: replace each <code>name="todo.org2.*"</code> with the second set of row <code>entry.&lt;ID&gt;</code>s.</span></div>
-      </section>
-
-      <!-- Comfort understanding — Block 1 (first 10 mapped, 4 need IDs) -->
-      <section class="card" aria-labelledby="comfort1">
-        <header id="comfort1">Comfort understanding — Block 1</header>
+      <!-- Comfort understanding -->
+      <section class="card" aria-labelledby="comfort">
+        <header id="comfort">Comfort understanding</header>
         <div class="content small">Look at the list below and think about how comfortable you are understanding each of them:</div>
         <div class="likert-wrap">
           <table class="likert">
@@ -546,204 +333,97 @@
             </thead>
             <tbody>
               <tr><th>My legal rights in the US</th>
+                <td><input type="radio" name="entry.523712851" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.523712851" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.523712851" value="Neutral"></td>
+                <td><input type="radio" name="entry.523712851" value="Comfortable"></td>
+                <td><input type="radio" name="entry.523712851" value="Very comfortable"></td></tr>
+              <tr><th>My legal rights in NYC</th>
+                <td><input type="radio" name="entry.1433219254" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.1433219254" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.1433219254" value="Neutral"></td>
+                <td><input type="radio" name="entry.1433219254" value="Comfortable"></td>
+                <td><input type="radio" name="entry.1433219254" value="Very comfortable"></td></tr>
+              <tr><th>The various types of state and city IDs available</th>
+                <td><input type="radio" name="entry.800255012" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.800255012" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.800255012" value="Neutral"></td>
+                <td><input type="radio" name="entry.800255012" value="Comfortable"></td>
+                <td><input type="radio" name="entry.800255012" value="Very comfortable"></td></tr>
+              <tr><th>Using the internet to find jobs</th>
+                <td><input type="radio" name="entry.50822816" value="Not comfortable at all"></td>
+                <td><input type="radio" name="entry.50822816" value="Not comfortable"></td>
+                <td><input type="radio" name="entry.50822816" value="Neutral"></td>
+                <td><input type="radio" name="entry.50822816" value="Comfortable"></td>
+                <td><input type="radio" name="entry.50822816" value="Very comfortable"></td></tr>
+              <tr><th>Obtaining a NY state ID</th>
                 <td><input type="radio" name="entry.1210679953" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.1210679953" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.1210679953" value="Neutral"></td>
                 <td><input type="radio" name="entry.1210679953" value="Comfortable"></td>
                 <td><input type="radio" name="entry.1210679953" value="Very comfortable"></td></tr>
-              <tr><th>My legal rights in NYC</th>
+              <tr><th>Obtaining a NY state driver's license</th>
                 <td><input type="radio" name="entry.593385043" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.593385043" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.593385043" value="Neutral"></td>
                 <td><input type="radio" name="entry.593385043" value="Comfortable"></td>
                 <td><input type="radio" name="entry.593385043" value="Very comfortable"></td></tr>
-              <tr><th>The various types of state and city IDs available</th>
+              <tr><th>Opening a bank account</th>
                 <td><input type="radio" name="entry.825293470" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.825293470" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.825293470" value="Neutral"></td>
                 <td><input type="radio" name="entry.825293470" value="Comfortable"></td>
                 <td><input type="radio" name="entry.825293470" value="Very comfortable"></td></tr>
-              <tr><th>Using the internet to find jobs</th>
+              <tr><th>Obtaining a library card</th>
                 <td><input type="radio" name="entry.1212986509" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.1212986509" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.1212986509" value="Neutral"></td>
                 <td><input type="radio" name="entry.1212986509" value="Comfortable"></td>
                 <td><input type="radio" name="entry.1212986509" value="Very comfortable"></td></tr>
-              <tr><th>Obtaining a NY state ID</th>
+              <tr><th>LinkNYC</th>
                 <td><input type="radio" name="entry.492336221" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.492336221" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.492336221" value="Neutral"></td>
                 <td><input type="radio" name="entry.492336221" value="Comfortable"></td>
                 <td><input type="radio" name="entry.492336221" value="Very comfortable"></td></tr>
-              <tr><th>Obtaining a NY state driver's license</th>
+              <tr><th>Occupational Health and Safety Administration (OSHA) certification</th>
                 <td><input type="radio" name="entry.208234539" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.208234539" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.208234539" value="Neutral"></td>
                 <td><input type="radio" name="entry.208234539" value="Comfortable"></td>
                 <td><input type="radio" name="entry.208234539" value="Very comfortable"></td></tr>
-              <tr><th>Opening a bank account</th>
+              <tr><th>Site Safety Training (SST) certification</th>
                 <td><input type="radio" name="entry.660511692" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.660511692" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.660511692" value="Neutral"></td>
                 <td><input type="radio" name="entry.660511692" value="Comfortable"></td>
                 <td><input type="radio" name="entry.660511692" value="Very comfortable"></td></tr>
-              <tr><th>Obtaining a library card</th>
+              <tr><th>Budgeting personal expenses</th>
                 <td><input type="radio" name="entry.1675028155" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.1675028155" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.1675028155" value="Neutral"></td>
                 <td><input type="radio" name="entry.1675028155" value="Comfortable"></td>
                 <td><input type="radio" name="entry.1675028155" value="Very comfortable"></td></tr>
-              <tr><th>LinkNYC</th>
+              <tr><th>Health insurance expenses like co-pays and deductibles</th>
                 <td><input type="radio" name="entry.1202113650" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.1202113650" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.1202113650" value="Neutral"></td>
                 <td><input type="radio" name="entry.1202113650" value="Comfortable"></td>
                 <td><input type="radio" name="entry.1202113650" value="Very comfortable"></td></tr>
-              <tr><th>Occupational Health and Safety Administration (OSHA) certification</th>
+              <tr><th>Payroll taxes for various types of employment</th>
                 <td><input type="radio" name="entry.1834223567" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.1834223567" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.1834223567" value="Neutral"></td>
                 <td><input type="radio" name="entry.1834223567" value="Comfortable"></td>
                 <td><input type="radio" name="entry.1834223567" value="Very comfortable"></td></tr>
-
-              <!-- 4 remaining rows need IDs -->
-              <tr><th>Site Safety Training (SST) certification</th>
-                <td><input type="radio" name="todo.comfort1.1" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort1.1" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort1.1" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort1.1" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort1.1" value="Very comfortable"></td></tr>
-              <tr><th>Budgeting personal expenses</th>
-                <td><input type="radio" name="todo.comfort1.2" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort1.2" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort1.2" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort1.2" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort1.2" value="Very comfortable"></td></tr>
-              <tr><th>Health insurance expenses like co-pays and deductibles</th>
-                <td><input type="radio" name="todo.comfort1.3" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort1.3" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort1.3" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort1.3" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort1.3" value="Very comfortable"></td></tr>
-              <tr><th>Payroll taxes for various types of employment</th>
-                <td><input type="radio" name="todo.comfort1.4" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort1.4" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort1.4" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort1.4" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort1.4" value="Very comfortable"></td></tr>
             </tbody>
           </table>
         </div>
-        <div class="content"><span class="todo">Block 1: replace each <code>name="todo.comfort1.*"</code> with its row <code>entry.&lt;ID&gt;</code>.</span></div>
       </section>
 
-      <!-- Comfort understanding — Block 2 (entire block needs its own row IDs) -->
-      <section class="card" aria-labelledby="comfort2">
-        <header id="comfort2">Comfort understanding — Block 2</header>
-        <div class="content small">Look at the list below and think about how comfortable you are understanding each of them:</div>
-        <div class="likert-wrap">
-          <table class="likert">
-            <thead>
-              <tr>
-                <th>Topic</th>
-                <th>Not comfortable at all</th><th>Not comfortable</th><th>Neutral</th><th>Comfortable</th><th>Very comfortable</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Replace name="todo.comfort2.N" with the duplicate block’s row entry.<ID> -->
-              <tr><th>My legal rights in the US</th>
-                <td><input type="radio" name="todo.comfort2.1" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.1" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.1" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.1" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.1" value="Very comfortable"></td></tr>
-              <tr><th>My legal rights in NYC</th>
-                <td><input type="radio" name="todo.comfort2.2" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.2" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.2" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.2" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.2" value="Very comfortable"></td></tr>
-              <tr><th>The various types of state and city IDs available</th>
-                <td><input type="radio" name="todo.comfort2.3" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.3" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.3" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.3" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.3" value="Very comfortable"></td></tr>
-              <tr><th>Using the internet to find jobs</th>
-                <td><input type="radio" name="todo.comfort2.4" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.4" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.4" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.4" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.4" value="Very comfortable"></td></tr>
-              <tr><th>Obtaining a NY state ID</th>
-                <td><input type="radio" name="todo.comfort2.5" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.5" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.5" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.5" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.5" value="Very comfortable"></td></tr>
-              <tr><th>Obtaining a NY state driver's license</th>
-                <td><input type="radio" name="todo.comfort2.6" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.6" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.6" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.6" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.6" value="Very comfortable"></td></tr>
-              <tr><th>Opening a bank account</th>
-                <td><input type="radio" name="todo.comfort2.7" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.7" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.7" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.7" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.7" value="Very comfortable"></td></tr>
-              <tr><th>Obtaining a library card</th>
-                <td><input type="radio" name="todo.comfort2.8" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.8" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.8" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.8" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.8" value="Very comfortable"></td></tr>
-              <tr><th>LinkNYC</th>
-                <td><input type="radio" name="todo.comfort2.9" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.9" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.9" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.9" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.9" value="Very comfortable"></td></tr>
-              <tr><th>Occupational Health and Safety Administration (OSHA) certification</th>
-                <td><input type="radio" name="todo.comfort2.10" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.10" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.10" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.10" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.10" value="Very comfortable"></td></tr>
-              <tr><th>Site Safety Training (SST) certification</th>
-                <td><input type="radio" name="todo.comfort2.11" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.11" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.11" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.11" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.11" value="Very comfortable"></td></tr>
-              <tr><th>Budgeting personal expenses</th>
-                <td><input type="radio" name="todo.comfort2.12" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.12" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.12" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.12" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.12" value="Very comfortable"></td></tr>
-              <tr><th>Health insurance expenses like co-pays and deductibles</th>
-                <td><input type="radio" name="todo.comfort2.13" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.13" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.13" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.13" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.13" value="Very comfortable"></td></tr>
-              <tr><th>Payroll taxes for various types of employment</th>
-                <td><input type="radio" name="todo.comfort2.14" value="Not comfortable at all"></td>
-                <td><input type="radio" name="todo.comfort2.14" value="Not comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.14" value="Neutral"></td>
-                <td><input type="radio" name="todo.comfort2.14" value="Comfortable"></td>
-                <td><input type="radio" name="todo.comfort2.14" value="Very comfortable"></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="content"><span class="todo">Block 2: replace each <code>name="todo.comfort2.*"</code> with its row <code>entry.&lt;ID&gt;</code>.</span></div>
-      </section>
-
-      <!-- Preparedness for job activities — Block 1 (all 5 mapped) -->
-      <section class="card" aria-labelledby="prep1">
-        <header id="prep1">Preparedness for job activities — Block 1</header>
+      <!-- Preparedness -->
+      <section class="card" aria-labelledby="prep">
+        <header id="prep">Preparedness for job activities</header>
         <div class="content small">Below are some activities related to finding and securing a job. Think about how prepared you feel to do each activity right now:</div>
         <div class="likert-wrap">
           <table class="likert">
@@ -789,60 +469,10 @@
         </div>
       </section>
 
-      <!-- Preparedness for job activities — Block 2 (needs row IDs) -->
-      <section class="card" aria-labelledby="prep2">
-        <header id="prep2">Preparedness for job activities — Block 2</header>
-        <div class="likert-wrap">
-          <table class="likert">
-            <thead>
-              <tr>
-                <th>Activity</th>
-                <th>Very unprepared</th><th>Unprepared</th><th>Neutral</th><th>Prepared</th><th>Very prepared</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Replace name="todo.prep2.N" with the duplicated block’s row entry.<ID> -->
-              <tr><th>Prepare my resume</th>
-                <td><input type="radio" name="todo.prep2.1" value="Very unprepared"></td>
-                <td><input type="radio" name="todo.prep2.1" value="Unprepared"></td>
-                <td><input type="radio" name="todo.prep2.1" value="Neutral"></td>
-                <td><input type="radio" name="todo.prep2.1" value="Prepared"></td>
-                <td><input type="radio" name="todo.prep2.1" value="Very prepared"></td></tr>
-              <tr><th>Conduct a job search</th>
-                <td><input type="radio" name="todo.prep2.2" value="Very unprepared"></td>
-                <td><input type="radio" name="todo.prep2.2" value="Unprepared"></td>
-                <td><input type="radio" name="todo.prep2.2" value="Neutral"></td>
-                <td><input type="radio" name="todo.prep2.2" value="Prepared"></td>
-                <td><input type="radio" name="todo.prep2.2" value="Very prepared"></td></tr>
-              <tr><th>Discuss my skills and work experience in an interview</th>
-                <td><input type="radio" name="todo.prep2.3" value="Very unprepared"></td>
-                <td><input type="radio" name="todo.prep2.3" value="Unprepared"></td>
-                <td><input type="radio" name="todo.prep2.3" value="Neutral"></td>
-                <td><input type="radio" name="todo.prep2.3" value="Prepared"></td>
-                <td><input type="radio" name="todo.prep2.3" value="Very prepared"></td></tr>
-              <tr><th>Speak conversational English</th>
-                <td><input type="radio" name="todo.prep2.4" value="Very unprepared"></td>
-                <td><input type="radio" name="todo.prep2.4" value="Unprepared"></td>
-                <td><input type="radio" name="todo.prep2.4" value="Neutral"></td>
-                <td><input type="radio" name="todo.prep2.4" value="Prepared"></td>
-                <td><input type="radio" name="todo.prep2.4" value="Very prepared"></td></tr>
-              <tr><th>Apply for a job</th>
-                <td><input type="radio" name="todo.prep2.5" value="Very unprepared"></td>
-                <td><input type="radio" name="todo.prep2.5" value="Unprepared"></td>
-                <td><input type="radio" name="todo.prep2.5" value="Neutral"></td>
-                <td><input type="radio" name="todo.prep2.5" value="Prepared"></td>
-                <td><input type="radio" name="todo.prep2.5" value="Very prepared"></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="content"><span class="todo">Block 2: replace each <code>name="todo.prep2.*"</code> with the duplicated block’s row <code>entry.&lt;ID&gt;</code>.</span></div>
-      </section>
-
       <!-- MCQ: last paid work in the US -->
       <section class="card" aria-labelledby="paid">
         <header id="paid">When did you last engage in paid work in the US?</header>
         <div class="content" style="display:grid;gap:8px">
-          <!-- All options share the same question entry ID -->
           <label><input type="radio" name="entry.701405359" value="Currently working a paid job in the US"> Currently working a paid job in the US</label>
           <label><input type="radio" name="entry.701405359" value="Have never had a paid job in the US"> Have never had a paid job in the US</label>
           <label><input type="radio" name="entry.701405359" value="Within the last 6 months"> Within the last 6 months</label>
@@ -855,7 +485,6 @@
         <header id="years">In total, how many years have you lived the US?</header>
         <div class="content small">If you were here, left, and have come back, include that time as well.</div>
         <div class="content" style="display:grid;gap:8px">
-          <!-- Same entry ID for the question; value is the choice text -->
           <label><input type="radio" name="entry.289512328" value="less than 6 months"> less than 6 months</label>
           <label><input type="radio" name="entry.289512328" value="6 months - 1 year"> 6 months - 1 year</label>
           <label><input type="radio" name="entry.289512328" value="2 - 5 years"> 2 - 5 years</label>
@@ -885,7 +514,7 @@
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(setPad);
     })();
 
-    // Clear everything quickly
+    // Clear all
     function clearAll(){
       document.querySelectorAll('#survey input[type="radio"]').forEach(el => el.checked = false);
       document.querySelectorAll('#survey input[type="text"]').forEach(el => el.value = '');
