@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -37,37 +37,45 @@
     .likert th,.likert td{padding:10px;text-align:center;border-bottom:1px solid var(--header-border)}
     .likert th:first-child{text-align:left}
     .controls{display:flex;gap:8px;justify-content:flex-end;padding:12px 18px;border-top:1px solid var(--header-border)}
+    /* Language selector */
+    .lang-select{display:flex;gap:8px;align-items:center}
+    .select{appearance:none;border:1px solid var(--header-border);padding:8px 10px;border-radius:8px;background:#fff;font-weight:600;cursor:pointer}
   </style>
 </head>
 <body>
   <!-- Sticky header -->
-  <header class="site-header" id="siteHeader">
+  <header class="site-header" id="siteHeader" role="banner">
     <div class="brand">
       <div class="brand-logo" aria-hidden="true"></div>
       <div>
-        <div class="brand-title">NICE Pre-Apprenticeship for Life and Work Program</div>
-        <small class="brand-sub">Sticky matrix headers • Submits to Google Forms</small>
+        <div class="brand-title" data-i18n="brandTitle">NICE Pre-Apprenticeship for Life and Work Program</div>
+        <small class="brand-sub" data-i18n="brandSub">Sticky matrix headers • Submits to Google Forms</small>
       </div>
     </div>
-    <nav>
-      <button id="clearAll" class="btn secondary" type="button">Clear</button>
-      <button form="survey" class="btn" type="submit">Submit</button>
+    <nav class="lang-select" aria-label="Actions">
+      <label for="lang" class="small" data-i18n="language">Language</label>
+      <select id="lang" class="select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+      </select>
+      <button id="clearAll" class="btn secondary" type="button" data-i18n="clear">Clear</button>
+      <button form="survey" class="btn" type="submit" data-i18n="submit">Submit</button>
     </nav>
   </header>
 
-  <main class="page">
+  <main class="page" role="main">
     <!-- Intro -->
     <section class="card">
-      <header>Welcome</header>
+      <header data-i18n="welcomeTitle">Welcome</header>
       <div class="content" style="line-height:1.45">
-        <p><strong>We're excited to have you participate in our pre-apprenticeship program.</strong></p>
-        <p>Because it is important to us to know how helpful this program is for our clients, we are asking you to complete this survey now, <strong>BEFORE</strong> you start the program and then later, <strong>AFTER</strong> you finish the program.</p>
+        <p><strong data-i18n="welcomeLead">We're excited to have you participate in our pre-apprenticeship program.</strong></p>
+        <p data-i18n="welcomePara">Because it is important to us to know how helpful this program is for our clients, we are asking you to complete this survey now, <strong>BEFORE</strong> you start the program and then later, <strong>AFTER</strong> you finish the program.</p>
         <div class="small">
           <ol>
-            <li>This is not a test — there are no right or wrong answers.</li>
-            <li>This survey is only helpful to us if your answers are honest.</li>
-            <li>No one except a few NICE staff will see your answers.</li>
-            <li>We are asking you to enter your first name and last initial so that we can match this survey with the one you take after the program.</li>
+            <li data-i18n="welcomeLi1">This is not a test — there are no right or wrong answers.</li>
+            <li data-i18n="welcomeLi2">This survey is only helpful to us if your answers are honest.</li>
+            <li data-i18n="welcomeLi3">No one except a few NICE staff will see your answers.</li>
+            <li data-i18n="welcomeLi4">We are asking you to enter your first name and last initial so that we can match this survey with the one you take after the program.</li>
           </ol>
         </div>
       </div>
@@ -79,176 +87,181 @@
 
       <!-- Free response -->
       <section class="card" aria-labelledby="ident">
-        <header id="ident">About you</header>
+        <header id="ident" data-i18n="aboutYou">About you</header>
         <div class="content">
           <label class="field">
-            <span><strong>Your first name</strong></span>
-            <input name="entry.1433485799" type="text" placeholder="FRQ1" required>
+            <span><strong data-i18n="firstName">Your first name</strong></span>
+            <input name="entry.1433485799" type="text" placeholder="FRQ1" required aria-labelledby="ident">
           </label>
           <label class="field">
-            <span><strong>The first letter of your last name</strong></span>
-            <input name="entry.1027960232" type="text" maxlength="1" placeholder="FRQ2" required>
+            <span><strong data-i18n="lastInitial">The first letter of your last name</strong></span>
+            <input name="entry.1027960232" type="text" maxlength="1" placeholder="FRQ2" required aria-labelledby="ident">
           </label>
         </div>
       </section>
 
       <!-- Workplace confidence -->
       <section class="card" aria-labelledby="work">
-        <header id="work">Workplace confidence</header>
-        <div class="content small">
+        <header id="work" data-i18n="workTitle">Workplace confidence</header>
+        <div class="content small" data-i18n="workDesc">
           For the question below, imagine that you have just gotten a job here in the US. Also imagine that the job starts tomorrow. You really want to make a good impression.
           <br>Read each of the following and rate how confident you are in your ability to do each right now:
         </div>
         <div class="likert-wrap">
-          <table class="likert">
+          <table class="likert" aria-describedby="work">
             <thead>
               <tr>
-                <th>Statement</th>
-                <th>Not confident at all</th><th>Not confident</th><th>Neutral</th><th>Confident</th><th>Very confident</th>
+                <th data-i18n="colStatement">Statement</th>
+                <!-- Column headers show Spanish when ES, but radio values stay English -->
+                <th data-i18n="optNotAtAll">Not confident at all</th>
+                <th data-i18n="optNot">Not confident</th>
+                <th data-i18n="optNeutral">Neutral</th>
+                <th data-i18n="optConfident">Confident</th>
+                <th data-i18n="optVery">Very confident</th>
               </tr>
             </thead>
-            <tbody>
-              <tr><th>Show my boss that I am a good listener</th>
+            <tbody id="workRows">
+              <tr><th></th>
                 <td><input type="radio" name="entry.1318978031" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.1318978031" value="Not confident"></td>
                 <td><input type="radio" name="entry.1318978031" value="Neutral"></td>
                 <td><input type="radio" name="entry.1318978031" value="Confident"></td>
                 <td><input type="radio" name="entry.1318978031" value="Very confident"></td></tr>
 
-              <tr><th>Collaborate effectively with my new colleagues</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.189709654" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.189709654" value="Not confident"></td>
                 <td><input type="radio" name="entry.189709654" value="Neutral"></td>
                 <td><input type="radio" name="entry.189709654" value="Confident"></td>
                 <td><input type="radio" name="entry.189709654" value="Very confident"></td></tr>
 
-              <tr><th>Ask my colleagues a question if I am uncertain about something</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.248390294" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.248390294" value="Not confident"></td>
                 <td><input type="radio" name="entry.248390294" value="Neutral"></td>
                 <td><input type="radio" name="entry.248390294" value="Confident"></td>
                 <td><input type="radio" name="entry.248390294" value="Very confident"></td></tr>
 
-              <tr><th>Ask my boss a question if I am uncertain about something</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.859281005" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.859281005" value="Not confident"></td>
                 <td><input type="radio" name="entry.859281005" value="Neutral"></td>
                 <td><input type="radio" name="entry.859281005" value="Confident"></td>
                 <td><input type="radio" name="entry.859281005" value="Very confident"></td></tr>
 
-              <tr><th>Generate multiple solutions to a problem</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1647226302" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.1647226302" value="Not confident"></td>
                 <td><input type="radio" name="entry.1647226302" value="Neutral"></td>
                 <td><input type="radio" name="entry.1647226302" value="Confident"></td>
                 <td><input type="radio" name="entry.1647226302" value="Very confident"></td></tr>
 
-              <tr><th>Manage my time efficiently to meet all my deadlines</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.479648666" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.479648666" value="Not confident"></td>
                 <td><input type="radio" name="entry.479648666" value="Neutral"></td>
                 <td><input type="radio" name="entry.479648666" value="Confident"></td>
                 <td><input type="radio" name="entry.479648666" value="Very confident"></td></tr>
 
-              <tr><th>Show my boss that I have a good work ethic</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.979305097" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.979305097" value="Not confident"></td>
                 <td><input type="radio" name="entry.979305097" value="Neutral"></td>
                 <td><input type="radio" name="entry.979305097" value="Confident"></td>
                 <td><input type="radio" name="entry.979305097" value="Very confident"></td></tr>
 
-              <tr><th>Show my colleagues that I have a good work ethic</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.866801450" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.866801450" value="Not confident"></td>
                 <td><input type="radio" name="entry.866801450" value="Neutral"></td>
                 <td><input type="radio" name="entry.866801450" value="Confident"></td>
                 <td><input type="radio" name="entry.866801450" value="Very confident"></td></tr>
 
-              <tr><th>Work with my colleagues to solve problems</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.713283654" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.713283654" value="Not confident"></td>
                 <td><input type="radio" name="entry.713283654" value="Neutral"></td>
                 <td><input type="radio" name="entry.713283654" value="Confident"></td>
                 <td><input type="radio" name="entry.713283654" value="Very confident"></td></tr>
 
-              <tr><th>Analyze what tasks are priorities</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.233246761" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.233246761" value="Not confident"></td>
                 <td><input type="radio" name="entry.233246761" value="Neutral"></td>
                 <td><input type="radio" name="entry.233246761" value="Confident"></td>
                 <td><input type="radio" name="entry.233246761" value="Very confident"></td></tr>
 
-              <tr><th>Inspire my colleagues</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1651807369" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.1651807369" value="Not confident"></td>
                 <td><input type="radio" name="entry.1651807369" value="Neutral"></td>
                 <td><input type="radio" name="entry.1651807369" value="Confident"></td>
                 <td><input type="radio" name="entry.1651807369" value="Very confident"></td></tr>
 
-              <tr><th>Motivate my colleagues</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.111198674" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.111198674" value="Not confident"></td>
                 <td><input type="radio" name="entry.111198674" value="Neutral"></td>
                 <td><input type="radio" name="entry.111198674" value="Confident"></td>
                 <td><input type="radio" name="entry.111198674" value="Very confident"></td></tr>
 
-              <tr><th>Convey to my colleagues that I understand what they are saying to me</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1640697353" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.1640697353" value="Not confident"></td>
                 <td><input type="radio" name="entry.1640697353" value="Neutral"></td>
                 <td><input type="radio" name="entry.1640697353" value="Confident"></td>
                 <td><input type="radio" name="entry.1640697353" value="Very confident"></td></tr>
 
-              <tr><th>Convey to my boss that I understand what they are saying to me</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1258675032" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.1258675032" value="Not confident"></td>
                 <td><input type="radio" name="entry.1258675032" value="Neutral"></td>
                 <td><input type="radio" name="entry.1258675032" value="Confident"></td>
                 <td><input type="radio" name="entry.1258675032" value="Very confident"></td></tr>
 
-              <tr><th>Keep my workspace/materials organized</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1860705415" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.1860705415" value="Not confident"></td>
                 <td><input type="radio" name="entry.1860705415" value="Neutral"></td>
                 <td><input type="radio" name="entry.1860705415" value="Confident"></td>
                 <td><input type="radio" name="entry.1860705415" value="Very confident"></td></tr>
 
-              <tr><th>Show my colleagues that I respect them</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.178717278" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.178717278" value="Not confident"></td>
                 <td><input type="radio" name="entry.178717278" value="Neutral"></td>
                 <td><input type="radio" name="entry.178717278" value="Confident"></td>
                 <td><input type="radio" name="entry.178717278" value="Very confident"></td></tr>
 
-              <tr><th>Show my boss that I respect them</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.579681165" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.579681165" value="Not confident"></td>
                 <td><input type="radio" name="entry.579681165" value="Neutral"></td>
                 <td><input type="radio" name="entry.579681165" value="Confident"></td>
                 <td><input type="radio" name="entry.579681165" value="Very confident"></td></tr>
 
-              <tr><th>Succeed at the job</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.767490314" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.767490314" value="Not confident"></td>
                 <td><input type="radio" name="entry.767490314" value="Neutral"></td>
                 <td><input type="radio" name="entry.767490314" value="Confident"></td>
                 <td><input type="radio" name="entry.767490314" value="Very confident"></td></tr>
 
-              <tr><th>Be seen as a reliable employee</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1282440325" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.1282440325" value="Not confident"></td>
                 <td><input type="radio" name="entry.1282440325" value="Neutral"></td>
                 <td><input type="radio" name="entry.1282440325" value="Confident"></td>
                 <td><input type="radio" name="entry.1282440325" value="Very confident"></td></tr>
 
-              <tr><th>Step up as a leader when necessary</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.63498692" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.63498692" value="Not confident"></td>
                 <td><input type="radio" name="entry.63498692" value="Neutral"></td>
                 <td><input type="radio" name="entry.63498692" value="Confident"></td>
                 <td><input type="radio" name="entry.63498692" value="Very confident"></td></tr>
 
-              <tr><th>Work with my colleagues as a team player</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1331580161" value="Not confident at all" required></td>
                 <td><input type="radio" name="entry.1331580161" value="Not confident"></td>
                 <td><input type="radio" name="entry.1331580161" value="Neutral"></td>
@@ -261,67 +274,71 @@
 
       <!-- NYC organizations/services -->
       <section class="card" aria-labelledby="orgs">
-        <header id="orgs">NYC organizations and services</header>
-        <div class="content small">Think about how confident you are to navigate each of the following right now:</div>
+        <header id="orgs" data-i18n="orgsTitle">NYC organizations and services</header>
+        <div class="content small" data-i18n="orgsDesc">Think about how confident you are to navigate each of the following right now:</div>
         <div class="likert-wrap">
-          <table class="likert">
+          <table class="likert" aria-describedby="orgs">
             <thead>
               <tr>
-                <th>Organization / service</th>
-                <th>Not confident at all</th><th>Not confident</th><th>Neutral</th><th>Confident</th><th>Very confident</th>
+                <th data-i18n="colOrg">Organization / service</th>
+                <th data-i18n="optNotAtAll">Not confident at all</th>
+                <th data-i18n="optNot">Not confident</th>
+                <th data-i18n="optNeutral">Neutral</th>
+                <th data-i18n="optConfident">Confident</th>
+                <th data-i18n="optVery">Very confident</th>
               </tr>
             </thead>
-            <tbody>
-              <tr><th>NY State Department of Motor Vehicles</th>
+            <tbody id="orgRows">
+              <tr><th></th>
                 <td><input type="radio" name="entry.366340186" value="Not confident at all"></td>
                 <td><input type="radio" name="entry.366340186" value="Not confident"></td>
                 <td><input type="radio" name="entry.366340186" value="Neutral"></td>
                 <td><input type="radio" name="entry.366340186" value="Confident"></td>
                 <td><input type="radio" name="entry.366340186" value="Very confident"></td></tr>
 
-              <tr><th>Health insurance services</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.880431258" value="Not confident at all"></td>
                 <td><input type="radio" name="entry.880431258" value="Not confident"></td>
                 <td><input type="radio" name="entry.880431258" value="Neutral"></td>
                 <td><input type="radio" name="entry.880431258" value="Confident"></td>
                 <td><input type="radio" name="entry.880431258" value="Very confident"></td></tr>
 
-              <tr><th>NYC public transportation</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1716974479" value="Not confident at all"></td>
                 <td><input type="radio" name="entry.1716974479" value="Not confident"></td>
                 <td><input type="radio" name="entry.1716974479" value="Neutral"></td>
                 <td><input type="radio" name="entry.1716974479" value="Confident"></td>
                 <td><input type="radio" name="entry.1716974479" value="Very confident"></td></tr>
 
-              <tr><th>Banks</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.754533098" value="Not confident at all"></td>
                 <td><input type="radio" name="entry.754533098" value="Not confident"></td>
                 <td><input type="radio" name="entry.754533098" value="Neutral"></td>
                 <td><input type="radio" name="entry.754533098" value="Confident"></td>
                 <td><input type="radio" name="entry.754533098" value="Very confident"></td></tr>
 
-              <tr><th>Public housing services</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.2019971695" value="Not confident at all"></td>
                 <td><input type="radio" name="entry.2019971695" value="Not confident"></td>
                 <td><input type="radio" name="entry.2019971695" value="Neutral"></td>
                 <td><input type="radio" name="entry.2019971695" value="Confident"></td>
                 <td><input type="radio" name="entry.2019971695" value="Very confident"></td></tr>
 
-              <tr><th>Immigration Services</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.108584485" value="Not confident at all"></td>
                 <td><input type="radio" name="entry.108584485" value="Not confident"></td>
                 <td><input type="radio" name="entry.108584485" value="Neutral"></td>
                 <td><input type="radio" name="entry.108584485" value="Confident"></td>
                 <td><input type="radio" name="entry.108584485" value="Very confident"></td></tr>
 
-              <tr><th>Public Libraries</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.829625071" value="Not confident at all"></td>
                 <td><input type="radio" name="entry.829625071" value="Not confident"></td>
                 <td><input type="radio" name="entry.829625071" value="Neutral"></td>
                 <td><input type="radio" name="entry.829625071" value="Confident"></td>
                 <td><input type="radio" name="entry.829625071" value="Very confident"></td></tr>
 
-              <tr><th>Department of Labor</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1600243474" value="Not confident at all"></td>
                 <td><input type="radio" name="entry.1600243474" value="Not confident"></td>
                 <td><input type="radio" name="entry.1600243474" value="Neutral"></td>
@@ -334,109 +351,113 @@
 
       <!-- Comfort understanding -->
       <section class="card" aria-labelledby="comfort">
-        <header id="comfort">Comfort understanding</header>
-        <div class="content small">Look at the list below and think about how comfortable you are understanding each of them:</div>
+        <header id="comfort" data-i18n="comfortTitle">Comfort understanding</header>
+        <div class="content small" data-i18n="comfortDesc">Look at the list below and think about how comfortable you are understanding each of them:</div>
         <div class="likert-wrap">
-          <table class="likert">
+          <table class="likert" aria-describedby="comfort">
             <thead>
               <tr>
-                <th>Topic</th>
-                <th>Not comfortable at all</th><th>Not comfortable</th><th>Neutral</th><th>Comfortable</th><th>Very comfortable</th>
+                <th data-i18n="colTopic">Topic</th>
+                <th data-i18n="optNCNotAtAll">Not comfortable at all</th>
+                <th data-i18n="optNCNot">Not comfortable</th>
+                <th data-i18n="optNeutral">Neutral</th>
+                <th data-i18n="optNComfort">Comfortable</th>
+                <th data-i18n="optNVery">Very comfortable</th>
               </tr>
             </thead>
-            <tbody>
-              <tr><th>My legal rights in the US</th>
+            <tbody id="comfortRows">
+              <tr><th></th>
                 <td><input type="radio" name="entry.523712851" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.523712851" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.523712851" value="Neutral"></td>
                 <td><input type="radio" name="entry.523712851" value="Comfortable"></td>
                 <td><input type="radio" name="entry.523712851" value="Very comfortable"></td></tr>
 
-              <tr><th>My legal rights in NYC</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1433219254" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.1433219254" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.1433219254" value="Neutral"></td>
                 <td><input type="radio" name="entry.1433219254" value="Comfortable"></td>
                 <td><input type="radio" name="entry.1433219254" value="Very comfortable"></td></tr>
 
-              <tr><th>The various types of state and city IDs available</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.800255012" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.800255012" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.800255012" value="Neutral"></td>
                 <td><input type="radio" name="entry.800255012" value="Comfortable"></td>
                 <td><input type="radio" name="entry.800255012" value="Very comfortable"></td></tr>
 
-              <tr><th>Using the internet to find jobs</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.50822816" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.50822816" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.50822816" value="Neutral"></td>
                 <td><input type="radio" name="entry.50822816" value="Comfortable"></td>
                 <td><input type="radio" name="entry.50822816" value="Very comfortable"></td></tr>
 
-              <tr><th>Obtaining a NY state ID</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1210679953" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.1210679953" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.1210679953" value="Neutral"></td>
                 <td><input type="radio" name="entry.1210679953" value="Comfortable"></td>
                 <td><input type="radio" name="entry.1210679953" value="Very comfortable"></td></tr>
 
-              <tr><th>Obtaining a NY state driver's license</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.593385043" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.593385043" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.593385043" value="Neutral"></td>
                 <td><input type="radio" name="entry.593385043" value="Comfortable"></td>
                 <td><input type="radio" name="entry.593385043" value="Very comfortable"></td></tr>
 
-              <tr><th>Opening a bank account</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.825293470" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.825293470" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.825293470" value="Neutral"></td>
                 <td><input type="radio" name="entry.825293470" value="Comfortable"></td>
                 <td><input type="radio" name="entry.825293470" value="Very comfortable"></td></tr>
 
-              <tr><th>Obtaining a library card</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1212986509" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.1212986509" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.1212986509" value="Neutral"></td>
                 <td><input type="radio" name="entry.1212986509" value="Comfortable"></td>
                 <td><input type="radio" name="entry.1212986509" value="Very comfortable"></td></tr>
 
-              <tr><th>LinkNYC</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.492336221" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.492336221" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.492336221" value="Neutral"></td>
                 <td><input type="radio" name="entry.492336221" value="Comfortable"></td>
                 <td><input type="radio" name="entry.492336221" value="Very comfortable"></td></tr>
 
-              <tr><th>Occupational Health and Safety Administration (OSHA) certification</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.208234539" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.208234539" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.208234539" value="Neutral"></td>
                 <td><input type="radio" name="entry.208234539" value="Comfortable"></td>
                 <td><input type="radio" name="entry.208234539" value="Very comfortable"></td></tr>
 
-              <tr><th>Site Safety Training (SST) certification</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.660511692" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.660511692" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.660511692" value="Neutral"></td>
                 <td><input type="radio" name="entry.660511692" value="Comfortable"></td>
                 <td><input type="radio" name="entry.660511692" value="Very comfortable"></td></tr>
 
-              <tr><th>Budgeting personal expenses</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1675028155" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.1675028155" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.1675028155" value="Neutral"></td>
                 <td><input type="radio" name="entry.1675028155" value="Comfortable"></td>
                 <td><input type="radio" name="entry.1675028155" value="Very comfortable"></td></tr>
 
-              <tr><th>Health insurance expenses like co-pays and deductibles</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1202113650" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.1202113650" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.1202113650" value="Neutral"></td>
                 <td><input type="radio" name="entry.1202113650" value="Comfortable"></td>
                 <td><input type="radio" name="entry.1202113650" value="Very comfortable"></td></tr>
 
-              <tr><th>Payroll taxes for various types of employment</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1834223567" value="Not comfortable at all"></td>
                 <td><input type="radio" name="entry.1834223567" value="Not comfortable"></td>
                 <td><input type="radio" name="entry.1834223567" value="Neutral"></td>
@@ -449,46 +470,50 @@
 
       <!-- Preparedness -->
       <section class="card" aria-labelledby="prep">
-        <header id="prep">Preparedness for job activities</header>
-        <div class="content small">Below are some activities related to finding and securing a job. Think about how prepared you feel to do each activity right now:</div>
+        <header id="prep" data-i18n="prepTitle">Preparedness for job activities</header>
+        <div class="content small" data-i18n="prepDesc">Below are some activities related to finding and securing a job. Think about how prepared you feel to do each activity right now:</div>
         <div class="likert-wrap">
-          <table class="likert">
+          <table class="likert" aria-describedby="prep">
             <thead>
               <tr>
-                <th>Activity</th>
-                <th>Very unprepared</th><th>Unprepared</th><th>Neutral</th><th>Prepared</th><th>Very prepared</th>
+                <th data-i18n="colActivity">Activity</th>
+                <th data-i18n="optVU">Very unprepared</th>
+                <th data-i18n="optU">Unprepared</th>
+                <th data-i18n="optNeutral">Neutral</th>
+                <th data-i18n="optP">Prepared</th>
+                <th data-i18n="optVP">Very prepared</th>
               </tr>
             </thead>
-            <tbody>
-              <tr><th>Prepare my resume</th>
+            <tbody id="prepRows">
+              <tr><th></th>
                 <td><input type="radio" name="entry.376956038" value="Very unprepared"></td>
                 <td><input type="radio" name="entry.376956038" value="Unprepared"></td>
                 <td><input type="radio" name="entry.376956038" value="Neutral"></td>
                 <td><input type="radio" name="entry.376956038" value="Prepared"></td>
                 <td><input type="radio" name="entry.376956038" value="Very prepared"></td></tr>
 
-              <tr><th>Conduct a job search</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1671198128" value="Very unprepared"></td>
                 <td><input type="radio" name="entry.1671198128" value="Unprepared"></td>
                 <td><input type="radio" name="entry.1671198128" value="Neutral"></td>
                 <td><input type="radio" name="entry.1671198128" value="Prepared"></td>
                 <td><input type="radio" name="entry.1671198128" value="Very prepared"></td></tr>
 
-              <tr><th>Discuss my skills and work experience in an interview</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.173242196" value="Very unprepared"></td>
                 <td><input type="radio" name="entry.173242196" value="Unprepared"></td>
                 <td><input type="radio" name="entry.173242196" value="Neutral"></td>
                 <td><input type="radio" name="entry.173242196" value="Prepared"></td>
                 <td><input type="radio" name="entry.173242196" value="Very prepared"></td></tr>
 
-              <tr><th>Speak conversational English</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.625390586" value="Very unprepared"></td>
                 <td><input type="radio" name="entry.625390586" value="Unprepared"></td>
                 <td><input type="radio" name="entry.625390586" value="Neutral"></td>
                 <td><input type="radio" name="entry.625390586" value="Prepared"></td>
                 <td><input type="radio" name="entry.625390586" value="Very prepared"></td></tr>
 
-              <tr><th>Apply for a job</th>
+              <tr><th></th>
                 <td><input type="radio" name="entry.1262421595" value="Very unprepared"></td>
                 <td><input type="radio" name="entry.1262421595" value="Unprepared"></td>
                 <td><input type="radio" name="entry.1262421595" value="Neutral"></td>
@@ -501,94 +526,320 @@
 
       <!-- MCQ: last paid work in the US -->
       <section class="card" aria-labelledby="paid">
-        <header id="paid">When did you last engage in paid work in the US?</header>
+        <header id="paid" data-i18n="paidTitle">When did you last engage in paid work in the US?</header>
         <div class="content" style="display:grid;gap:8px">
-          <label><input type="radio" name="entry.701405359" value="Currently working a paid job in the US"> Currently working a paid job in the US</label>
-          <label><input type="radio" name="entry.701405359" value="Have never had a paid job in the US"> Have never had a paid job in the US</label>
-          <label><input type="radio" name="entry.701405359" value="Within the last 6 months"> Within the last 6 months</label>
-          <label><input type="radio" name="entry.701405359" value="More than 6 months ago"> More than 6 months ago</label>
+          <label><input type="radio" name="entry.701405359" value="Currently working a paid job in the US"> <span data-i18n="paidOpt1">Currently working a paid job in the US</span></label>
+          <label><input type="radio" name="entry.701405359" value="Have never had a paid job in the US"> <span data-i18n="paidOpt2">Have never had a paid job in the US</span></label>
+          <label><input type="radio" name="entry.701405359" value="Within the last 6 months"> <span data-i18n="paidOpt3">Within the last 6 months</span></label>
+          <label><input type="radio" name="entry.701405359" value="More than 6 months ago"> <span data-i18n="paidOpt4">More than 6 months ago</span></label>
         </div>
       </section>
 
       <!-- MCQ: total years in the US -->
       <section class="card" aria-labelledby="years">
-        <header id="years">In total, how many years have you lived the US?</header>
-        <div class="content small">If you were here, left, and have come back, include that time as well.</div>
+        <header id="years" data-i18n="yearsTitle">In total, how many years have you lived the US?</header>
+        <div class="content small" data-i18n="yearsDesc">If you were here, left, and have come back, include that time as well.</div>
         <div class="content" style="display:grid;gap:8px">
-          <label><input type="radio" name="entry.289512328" value="less than 6 months"> less than 6 months</label>
-          <label><input type="radio" name="entry.289512328" value="6 months - 1 year"> 6 months - 1 year</label>
-          <label><input type="radio" name="entry.289512328" value="2 - 5 years"> 2 - 5 years</label>
-          <label><input type="radio" name="entry.289512328" value="6 - 10 years"> 6 - 10 years</label>
-          <label><input type="radio" name="entry.289512328" value="more than 10 years"> more than 10 years</label>
+          <label><input type="radio" name="entry.289512328" value="less than 6 months"> <span data-i18n="years1">less than 6 months</span></label>
+          <label><input type="radio" name="entry.289512328" value="6 months - 1 year"> <span data-i18n="years2">6 months - 1 year</span></label>
+          <label><input type="radio" name="entry.289512328" value="2 - 5 years"> <span data-i18n="years3">2 - 5 years</span></label>
+          <label><input type="radio" name="entry.289512328" value="6 - 10 years"> <span data-i18n="years4">6 - 10 years</span></label>
+          <label><input type="radio" name="entry.289512328" value="more than 10 years"> <span data-i18n="years5">more than 10 years</span></label>
         </div>
       </section>
 
-      <!-- Hidden sentinel fields for ALL grid rows (recommended) -->
-      <!-- Workplace confidence (21) -->
-      <input type="hidden" name="entry.1318978031_sentinel" value="">
-      <input type="hidden" name="entry.189709654_sentinel" value="">
-      <input type="hidden" name="entry.248390294_sentinel" value="">
-      <input type="hidden" name="entry.859281005_sentinel" value="">
-      <input type="hidden" name="entry.1647226302_sentinel" value="">
-      <input type="hidden" name="entry.479648666_sentinel" value="">
-      <input type="hidden" name="entry.979305097_sentinel" value="">
-      <input type="hidden" name="entry.866801450_sentinel" value="">
-      <input type="hidden" name="entry.713283654_sentinel" value="">
-      <input type="hidden" name="entry.233246761_sentinel" value="">
-      <input type="hidden" name="entry.1651807369_sentinel" value="">
-      <input type="hidden" name="entry.111198674_sentinel" value="">
-      <input type="hidden" name="entry.1640697353_sentinel" value="">
-      <input type="hidden" name="entry.1258675032_sentinel" value="">
-      <input type="hidden" name="entry.1860705415_sentinel" value="">
-      <input type="hidden" name="entry.178717278_sentinel" value="">
-      <input type="hidden" name="entry.579681165_sentinel" value="">
-      <input type="hidden" name="entry.767490314_sentinel" value="">
-      <input type="hidden" name="entry.1282440325_sentinel" value="">
-      <input type="hidden" name="entry.63498692_sentinel" value="">
-      <input type="hidden" name="entry.1331580161_sentinel" value="">
-
-      <!-- NYC orgs/services (8) -->
-      <input type="hidden" name="entry.366340186_sentinel" value="">
-      <input type="hidden" name="entry.880431258_sentinel" value="">
-      <input type="hidden" name="entry.1716974479_sentinel" value="">
-      <input type="hidden" name="entry.754533098_sentinel" value="">
-      <input type="hidden" name="entry.2019971695_sentinel" value="">
-      <input type="hidden" name="entry.108584485_sentinel" value="">
-      <input type="hidden" name="entry.829625071_sentinel" value="">
-      <input type="hidden" name="entry.1600243474_sentinel" value="">
-
-      <!-- Comfort understanding (14) -->
-      <input type="hidden" name="entry.523712851_sentinel" value="">
-      <input type="hidden" name="entry.1433219254_sentinel" value="">
-      <input type="hidden" name="entry.800255012_sentinel" value="">
-      <input type="hidden" name="entry.50822816_sentinel" value="">
-      <input type="hidden" name="entry.1210679953_sentinel" value="">
-      <input type="hidden" name="entry.593385043_sentinel" value="">
-      <input type="hidden" name="entry.825293470_sentinel" value="">
-      <input type="hidden" name="entry.1212986509_sentinel" value="">
-      <input type="hidden" name="entry.492336221_sentinel" value="">
-      <input type="hidden" name="entry.208234539_sentinel" value="">
-      <input type="hidden" name="entry.660511692_sentinel" value="">
-      <input type="hidden" name="entry.1675028155_sentinel" value="">
-      <input type="hidden" name="entry.1202113650_sentinel" value="">
-      <input type="hidden" name="entry.1834223567_sentinel" value="">
-
-      <!-- Preparedness (5) -->
-      <input type="hidden" name="entry.376956038_sentinel" value="">
-      <input type="hidden" name="entry.1671198128_sentinel" value="">
-      <input type="hidden" name="entry.173242196_sentinel" value="">
-      <input type="hidden" name="entry.625390586_sentinel" value="">
-      <input type="hidden" name="entry.1262421595_sentinel" value="">
+      <!-- Hidden sentinel fields (unchanged) -->
+      <input type="hidden" name="entry.1318978031_sentinel" value=""><input type="hidden" name="entry.189709654_sentinel" value=""><input type="hidden" name="entry.248390294_sentinel" value=""><input type="hidden" name="entry.859281005_sentinel" value=""><input type="hidden" name="entry.1647226302_sentinel" value=""><input type="hidden" name="entry.479648666_sentinel" value=""><input type="hidden" name="entry.979305097_sentinel" value=""><input type="hidden" name="entry.866801450_sentinel" value=""><input type="hidden" name="entry.713283654_sentinel" value=""><input type="hidden" name="entry.233246761_sentinel" value=""><input type="hidden" name="entry.1651807369_sentinel" value=""><input type="hidden" name="entry.111198674_sentinel" value=""><input type="hidden" name="entry.1640697353_sentinel" value=""><input type="hidden" name="entry.1258675032_sentinel" value=""><input type="hidden" name="entry.1860705415_sentinel" value=""><input type="hidden" name="entry.178717278_sentinel" value=""><input type="hidden" name="entry.579681165_sentinel" value=""><input type="hidden" name="entry.767490314_sentinel" value=""><input type="hidden" name="entry.1282440325_sentinel" value=""><input type="hidden" name="entry.63498692_sentinel" value=""><input type="hidden" name="entry.1331580161_sentinel" value="">
+      <input type="hidden" name="entry.366340186_sentinel" value=""><input type="hidden" name="entry.880431258_sentinel" value=""><input type="hidden" name="entry.1716974479_sentinel" value=""><input type="hidden" name="entry.754533098_sentinel" value=""><input type="hidden" name="entry.2019971695_sentinel" value=""><input type="hidden" name="entry.108584485_sentinel" value=""><input type="hidden" name="entry.829625071_sentinel" value=""><input type="hidden" name="entry.1600243474_sentinel" value="">
+      <input type="hidden" name="entry.523712851_sentinel" value=""><input type="hidden" name="entry.1433219254_sentinel" value=""><input type="hidden" name="entry.800255012_sentinel" value=""><input type="hidden" name="entry.50822816_sentinel" value=""><input type="hidden" name="entry.1210679953_sentinel" value=""><input type="hidden" name="entry.593385043_sentinel" value=""><input type="hidden" name="entry.825293470_sentinel" value=""><input type="hidden" name="entry.1212986509_sentinel" value=""><input type="hidden" name="entry.492336221_sentinel" value=""><input type="hidden" name="entry.208234539_sentinel" value=""><input type="hidden" name="entry.660511692_sentinel" value=""><input type="hidden" name="entry.1675028155_sentinel" value=""><input type="hidden" name="entry.1202113650_sentinel" value=""><input type="hidden" name="entry.1834223567_sentinel" value="">
+      <input type="hidden" name="entry.376956038_sentinel" value=""><input type="hidden" name="entry.1671198128_sentinel" value=""><input type="hidden" name="entry.173242196_sentinel" value=""><input type="hidden" name="entry.625390586_sentinel" value=""><input type="hidden" name="entry.1262421595_sentinel" value="">
 
       <!-- Bottom controls -->
       <section class="controls">
-        <button id="clearAll2" class="btn secondary" type="button">Clear</button>
-        <button class="btn" type="submit">Submit</button>
+        <button id="clearAll2" class="btn secondary" type="button" data-i18n="clear">Clear</button>
+        <button class="btn" type="submit" data-i18n="submit">Submit</button>
       </section>
     </form>
   </main>
 
   <script>
+    // ===== i18n dictionary =====
+    const I18N = {
+      en: {
+        brandTitle: "NICE Pre-Apprenticeship for Life and Work Program",
+        brandSub: "Sticky matrix headers • Submits to Google Forms",
+        language: "Language",
+        clear: "Clear",
+        submit: "Submit",
+        welcomeTitle: "Welcome",
+        welcomeLead: "We're excited to have you participate in our pre-apprenticeship program.",
+        welcomePara: "Because it is important to us to know how helpful this program is for our clients, we are asking you to complete this survey now, <strong>BEFORE</strong> you start the program and then later, <strong>AFTER</strong> you finish the program.",
+        welcomeLi1: "This is not a test — there are no right or wrong answers.",
+        welcomeLi2: "This survey is only helpful to us if your answers are honest.",
+        welcomeLi3: "No one except a few NICE staff will see your answers.",
+        welcomeLi4: "We are asking you to enter your first name and last initial so that we can match this survey with the one you take after the program.",
+        aboutYou: "About you",
+        firstName: "Your first name",
+        lastInitial: "The first letter of your last name",
+
+        workTitle: "Workplace confidence",
+        workDesc: "For the question below, imagine that you have just gotten a job here in the US. Also imagine that the job starts tomorrow. You really want to make a good impression.<br>Read each of the following and rate how confident you are in your ability to do each right now:",
+        colStatement: "Statement",
+
+        optNotAtAll: "Not confident at all",
+        optNot: "Not confident",
+        optNeutral: "Neutral",
+        optConfident: "Confident",
+        optVery: "Very confident",
+
+        orgsTitle: "NYC organizations and services",
+        orgsDesc: "Think about how confident you are to navigate each of the following right now:",
+        colOrg: "Organization / service",
+
+        comfortTitle: "Comfort understanding",
+        comfortDesc: "Look at the list below and think about how comfortable you are understanding each of them:",
+        colTopic: "Topic",
+        optNCNotAtAll: "Not comfortable at all",
+        optNCNot: "Not comfortable",
+        optNComfort: "Comfortable",
+        optNVery: "Very comfortable",
+
+        prepTitle: "Preparedness for job activities",
+        prepDesc: "Below are some activities related to finding and securing a job. Think about how prepared you feel to do each activity right now:",
+        colActivity: "Activity",
+        optVU: "Very unprepared",
+        optU: "Unprepared",
+        optP: "Prepared",
+        optVP: "Very prepared",
+
+        paidTitle: "When did you last engage in paid work in the US?",
+        paidOpt1: "Currently working a paid job in the US",
+        paidOpt2: "Have never had a paid job in the US",
+        paidOpt3: "Within the last 6 months",
+        paidOpt4: "More than 6 months ago",
+
+        yearsTitle: "In total, how many years have you lived the US?",
+        yearsDesc: "If you were here, left, and have come back, include that time as well.",
+        years1: "less than 6 months",
+        years2: "6 months - 1 year",
+        years3: "2 - 5 years",
+        years4: "6 - 10 years",
+        years5: "more than 10 years",
+      },
+      es: {
+        brandTitle: "Programa NICE de Pre-aprendizaje para la Vida y el Trabajo",
+        brandSub: "Encabezados pegajosos en las matrices • Envía a Google Forms",
+        language: "Idioma",
+        clear: "Borrar",
+        submit: "Enviar",
+        welcomeTitle: "Bienvenido/a",
+        welcomeLead: "Nos entusiasma que participes en nuestro programa de pre-aprendizaje.",
+        welcomePara: "Como es importante para nosotros saber cuán útil es este programa para nuestros/as participantes, te pedimos que completes esta encuesta ahora, <strong>ANTES</strong> de comenzar el programa y luego <strong>DESPUÉS</strong> de terminarlo.",
+        welcomeLi1: "Esto no es un examen: no hay respuestas correctas o incorrectas.",
+        welcomeLi2: "Esta encuesta solo es útil si tus respuestas son honestas.",
+        welcomeLi3: "Nadie excepto un pequeño equipo de NICE verá tus respuestas.",
+        welcomeLi4: "Te pedimos tu nombre y la inicial de tu apellido para poder relacionar esta encuesta con la que completarás después del programa.",
+        aboutYou: "Sobre ti",
+        firstName: "Tu nombre",
+        lastInitial: "La primera letra de tu apellido",
+
+        workTitle: "Confianza en el entorno laboral",
+        workDesc: "Para la siguiente pregunta, imagina que acabas de conseguir un trabajo en EE. UU. y que comienzas mañana. Quieres causar una buena impresión.<br>Lee cada afirmación y califica qué tan confiado/a te sientes para hacer cada cosa ahora mismo:",
+        colStatement: "Afirmación",
+
+        optNotAtAll: "Nada confiado/a",
+        optNot: "Poco confiado/a",
+        optNeutral: "Neutral",
+        optConfident: "Confiado/a",
+        optVery: "Muy confiado/a",
+
+        orgsTitle: "Organizaciones y servicios de NYC",
+        orgsDesc: "Piensa qué tan confiado/a estás para desenvolverte ahora mismo en cada uno de los siguientes:",
+        colOrg: "Organización / servicio",
+
+        comfortTitle: "Comodidad al comprender",
+        comfortDesc: "Observa la lista y piensa qué tan cómodo/a te sientes comprendiendo cada tema:",
+        colTopic: "Tema",
+        optNCNotAtAll: "Nada cómodo/a",
+        optNCNot: "Poco cómodo/a",
+        optNComfort: "Cómodo/a",
+        optNVery: "Muy cómodo/a",
+
+        prepTitle: "Preparación para actividades laborales",
+        prepDesc: "A continuación hay actividades relacionadas con buscar y conseguir trabajo. Indica qué tan preparado/a te sientes para cada una ahora mismo:",
+        colActivity: "Actividad",
+        optVU: "Muy poco preparado/a",
+        optU: "Poco preparado/a",
+        optP: "Preparado/a",
+        optVP: "Muy preparado/a",
+
+        paidTitle: "¿Cuándo fue la última vez que trabajaste con pago en EE. UU.?",
+        paidOpt1: "Actualmente trabajo en un empleo remunerado en EE. UU.",
+        paidOpt2: "Nunca he tenido un empleo remunerado en EE. UU.",
+        paidOpt3: "En los últimos 6 meses",
+        paidOpt4: "Hace más de 6 meses",
+
+        yearsTitle: "En total, ¿cuántos años has vivido en EE. UU.?",
+        yearsDesc: "Si estuviste aquí, te fuiste y regresaste, incluye también ese tiempo.",
+        years1: "menos de 6 meses",
+        years2: "6 meses - 1 año",
+        years3: "2 - 5 años",
+        years4: "6 - 10 años",
+        years5: "más de 10 años",
+      }
+    };
+
+    // Row text arrays (visible labels only; radio values remain English)
+    const ROWS = {
+      work: {
+        en: [
+          "Show my boss that I am a good listener",
+          "Collaborate effectively with my new colleagues",
+          "Ask my colleagues a question if I am uncertain about something",
+          "Ask my boss a question if I am uncertain about something",
+          "Generate multiple solutions to a problem",
+          "Manage my time efficiently to meet all my deadlines",
+          "Show my boss that I have a good work ethic",
+          "Show my colleagues that I have a good work ethic",
+          "Work with my colleagues to solve problems",
+          "Analyze what tasks are priorities",
+          "Inspire my colleagues",
+          "Motivate my colleagues",
+          "Convey to my colleagues that I understand what they are saying to me",
+          "Convey to my boss that I understand what they are saying to me",
+          "Keep my workspace/materials organized",
+          "Show my colleagues that I respect them",
+          "Show my boss that I respect them",
+          "Succeed at the job",
+          "Be seen as a reliable employee",
+          "Step up as a leader when necessary",
+          "Work with my colleagues as a team player",
+        ],
+        es: [
+          "Demostrar a mi jefe que soy buen/a oyente",
+          "Colaborar eficazmente con mis nuevos compañeros/as",
+          "Preguntar a mis compañeros/as cuando no estoy seguro/a de algo",
+          "Preguntar a mi jefe cuando no estoy seguro/a de algo",
+          "Generar varias soluciones para un problema",
+          "Gestionar mi tiempo para cumplir todos los plazos",
+          "Demostrar a mi jefe que tengo buena ética de trabajo",
+          "Demostrar a mis compañeros/as que tengo buena ética de trabajo",
+          "Trabajar con mis compañeros/as para resolver problemas",
+          "Analizar qué tareas son prioritarias",
+          "Inspirar a mis compañeros/as",
+          "Motivar a mis compañeros/as",
+          "Transmitir a mis compañeros/as que entiendo lo que me dicen",
+          "Transmitir a mi jefe que entiendo lo que me dice",
+          "Mantener mi espacio/materiales organizados/as",
+          "Demostrar a mis compañeros/as que los respeto",
+          "Demostrar a mi jefe que lo/la respeto",
+          "Tener éxito en el trabajo",
+          "Ser visto/a como una persona confiable",
+          "Asumir el liderazgo cuando sea necesario",
+          "Trabajar como jugador/a de equipo con mis compañeros/as",
+        ]
+      },
+      orgs: {
+        en: [
+          "NY State Department of Motor Vehicles",
+          "Health insurance services",
+          "NYC public transportation",
+          "Banks",
+          "Public housing services",
+          "Immigration Services",
+          "Public Libraries",
+          "Department of Labor",
+        ],
+        es: [
+          "Departamento de Vehículos Motorizados del Estado de NY (DMV)",
+          "Servicios de seguro médico",
+          "Transporte público de NYC",
+          "Bancos",
+          "Servicios de vivienda pública",
+          "Servicios de inmigración",
+          "Bibliotecas públicas",
+          "Departamento de Trabajo",
+        ]
+      },
+      comfort: {
+        en: [
+          "My legal rights in the US",
+          "My legal rights in NYC",
+          "The various types of state and city IDs available",
+          "Using the internet to find jobs",
+          "Obtaining a NY state ID",
+          "Obtaining a NY state driver's license",
+          "Opening a bank account",
+          "Obtaining a library card",
+          "LinkNYC",
+          "Occupational Health and Safety Administration (OSHA) certification",
+          "Site Safety Training (SST) certification",
+          "Budgeting personal expenses",
+          "Health insurance expenses like co-pays and deductibles",
+          "Payroll taxes for various types of employment",
+        ],
+        es: [
+          "Mis derechos legales en EE. UU.",
+          "Mis derechos legales en NYC",
+          "Los distintos tipos de identificaciones estatales y municipales disponibles",
+          "Usar internet para buscar trabajos",
+          "Obtener una identificación del Estado de NY",
+          "Obtener una licencia de conducir del Estado de NY",
+          "Abrir una cuenta bancaria",
+          "Obtener una tarjeta de biblioteca",
+          "LinkNYC",
+          "Certificación de OSHA (Seguridad y Salud Ocupacional)",
+          "Certificación de SST (Entrenamiento de Seguridad en Obra)",
+          "Presupuestar gastos personales",
+          "Gastos de seguro médico como copagos y deducibles",
+          "Impuestos de nómina para distintos tipos de empleo",
+        ]
+      },
+      prep: {
+        en: [
+          "Prepare my resume",
+          "Conduct a job search",
+          "Discuss my skills and work experience in an interview",
+          "Speak conversational English",
+          "Apply for a job",
+        ],
+        es: [
+          "Preparar mi currículum",
+          "Realizar una búsqueda de empleo",
+          "Hablar de mis habilidades y experiencia laboral en una entrevista",
+          "Hablar inglés conversacional",
+          "Postular a un trabajo",
+        ]
+      }
+    };
+
+    function applyI18n(lang){
+      const dict = I18N[lang];
+      // Swap simple data-i18n nodes
+      document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const key = el.getAttribute("data-i18n");
+        const html = dict[key];
+        if (html != null){
+          if (html.includes("<")) el.innerHTML = html;
+          else el.textContent = html;
+        }
+      });
+
+      // Update row labels for each table
+      const fillRows = (tbodyId, texts) => {
+        const ths = Array.from(document.querySelectorAll(`#${tbodyId} > tr > th`));
+        ths.forEach((th, i)=>{ if(texts[i]!=null) th.textContent = texts[i]; });
+      };
+      fillRows("workRows", ROWS.work[lang]);
+      fillRows("orgRows", ROWS.orgs[lang]);
+      fillRows("comfortRows", ROWS.comfort[lang]);
+      fillRows("prepRows", ROWS.prep[lang]);
+
+      // Document language attr
+      document.documentElement.lang = lang === "es" ? "es" : "en";
+      document.documentElement.setAttribute("data-lang", lang);
+    }
+
     // keep content below sticky header
     (function(){
       const header = document.getElementById('siteHeader');
@@ -609,6 +860,17 @@
     }
     document.getElementById('clearAll').addEventListener('click', clearAll);
     document.getElementById('clearAll2').addEventListener('click', clearAll);
+
+    // Language selector + persistence
+    const langSel = document.getElementById('lang');
+    const saved = localStorage.getItem('survey_lang') || 'en';
+    langSel.value = saved;
+    applyI18n(saved);
+    langSel.addEventListener('change', ()=>{
+      const lang = langSel.value;
+      localStorage.setItem('survey_lang', lang);
+      applyI18n(lang);
+    });
   </script>
 </body>
 </html>
