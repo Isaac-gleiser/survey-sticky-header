@@ -759,51 +759,20 @@
       document.querySelectorAll('[data-i18n]').forEach(el=>{
         const key = el.getAttribute('data-i18n');
         if (dict[key] !== undefined){
-          // Preserve <strong> tags in intro2
+          // Keep bold tags in intro2
           if (key === 'intro2'){
-            el.innerHTML = dict[key].replace(/\*\*?BEFORE\*\*?/g,'<strong>BEFORE</strong>').replace(/\*\*?AFTER\*\*?/g,'<strong>AFTER</strong>');
+            const tmp = document.createElement('div');
+            tmp.textContent = dict[key];
+            // the dict already contains plain text; keep existing <strong> tags in the element
+            el.innerHTML = tmp.textContent.replace('BEFORE','<strong>BEFORE</strong>').replace('AFTER','<strong>AFTER</strong>');
           } else {
             el.textContent = dict[key];
           }
         }
       });
-      // Update option values (so review shows translated text)
-      const valueMap = {
-        en: {
-          "Nada confiado/a":"Not confident at all",
-          "Poco confiado/a":"Not confident",
-          "Neutral":"Neutral",
-          "Confiado/a":"Confident",
-          "Muy confiado/a":"Very confident",
-          "Nada cómodo/a":"Not comfortable at all",
-          "Poco cómodo/a":"Not comfortable",
-          "Cómodo/a":"Comfortable",
-          "Muy cómodo/a":"Very comfortable",
-          "Nada preparado/a":"Very unprepared",
-          "Poco preparado/a":"Unprepared",
-          "Preparado/a":"Prepared",
-          "Muy preparado/a":"Very prepared"
-        },
-        es: {
-          "Not confident at all":"Nada confiado/a",
-          "Not confident":"Poco confiado/a",
-          "Neutral":"Neutral",
-          "Confident":"Confiado/a",
-          "Very confident":"Muy confiado/a",
-          "Not comfortable at all":"Nada cómodo/a",
-          "Not comfortable":"Poco cómodo/a",
-          "Comfortable":"Cómodo/a",
-          "Very comfortable":"Muy cómodo/a",
-          "Very unprepared":"Nada preparado/a",
-          "Unprepared":"Poco preparado/a",
-          "Prepared":"Preparado/a",
-          "Very prepared":"Muy preparado/a"
-        }
-      }[lang];
 
-      document.querySelectorAll('input[type="radio"]').forEach(input=>{
-        if (valueMap[input.value]) input.value = valueMap[input.value];
-      });
+      // DO NOT mutate input values (Google Forms requires exact option text)
+      // We only translated visible headers/labels above.
 
       // Buttons and tag labels
       langBtn.textContent = (lang === 'en') ? 'ES' : 'EN';
@@ -878,6 +847,39 @@
       return items;
     }
 
+    // Value display map for review (do not affect submission)
+    const DISPLAY_MAP = {
+      es: {
+        "Not confident at all":"Nada confiado/a",
+        "Not confident":"Poco confiado/a",
+        "Neutral":"Neutral",
+        "Confident":"Confiado/a",
+        "Very confident":"Muy confiado/a",
+        "Not comfortable at all":"Nada cómodo/a",
+        "Not comfortable":"Poco cómodo/a",
+        "Comfortable":"Cómodo/a",
+        "Very comfortable":"Muy cómodo/a",
+        "Very unprepared":"Nada preparado/a",
+        "Unprepared":"Poco preparado/a",
+        "Prepared":"Preparado/a",
+        "Very prepared":"Muy preparado/a",
+        "Currently working a paid job in the US":"Actualmente trabajo en un empleo pagado en EE. UU.",
+        "Have never had a paid job in the US":"Nunca he tenido un empleo pagado en EE. UU.",
+        "Within the last 6 months":"En los últimos 6 meses",
+        "More than 6 months ago":"Hace más de 6 meses",
+        "less than 6 months":"menos de 6 meses",
+        "6 months - 1 year":"6 meses - 1 año",
+        "2 - 5 years":"2 - 5 años",
+        "6 - 10 years":"6 - 10 años",
+        "more than 10 years":"más de 10 años"
+      },
+      en: {} // English shows as-is
+    };
+
+    function localizeValueForDisplay(value){
+      return DISPLAY_MAP[currentLang][value] || value;
+    }
+
     function renderReview(){
       reviewGrid.innerHTML = '';
       const items = groupQuestions();
@@ -887,7 +889,7 @@
         q.textContent = label;
         const v = document.createElement('div');
         v.className = 'v';
-        v.textContent = value;
+        v.textContent = localizeValueForDisplay(value);
         reviewGrid.appendChild(q);
         reviewGrid.appendChild(v);
       }
